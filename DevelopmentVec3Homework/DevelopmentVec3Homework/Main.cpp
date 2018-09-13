@@ -6,7 +6,8 @@ using namespace std;
 
 int main ()
 {
-	
+	cout << "DEVELOPMENT HOMEWORK   vec3" << endl;
+	cout << "-----------------------------------------------------------------------------------------" << endl;
 
 
 

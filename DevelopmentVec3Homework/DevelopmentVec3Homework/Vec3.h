@@ -9,7 +9,10 @@ class vec3
 {
 public:
 	
-	vec3() {}
+	//Default Constructor sets the vec3 to 0 value
+	vec3() { x = y = z = 0; }
+	vec3(T newX, T newY, T newZ) { x = newX; y = newY; z = newZ; }
+	vec3(vec3 &vecToCopy) { x = vecToCopy->getX(); y = vecToCopy->getY(); z = vecToCopy->getZ(); }
 	~vec3() {}
 
 	//OPERATORS (+,-,+=,-=,=,==)
