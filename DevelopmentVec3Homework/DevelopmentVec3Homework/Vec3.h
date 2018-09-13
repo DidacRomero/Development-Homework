@@ -3,20 +3,20 @@
 
 template <class T>
 
-class Vec3
+class vec3
 {
 public:
 	
-	Vec3() {}
-	~Vec3() {}
+	vec3() {}
+	~vec3() {}
 
-	//OPERATORS
-	void operator+ ()
-	void operator- ()
-	void operator+= ()
-	void operator-= ()
-	void operator= ()
-	void operator== ()
+	//OPERATORS (+,-,+=,-=,=,==)
+	void operator+  (const vec3 v2) {}
+	void operator-  (const vec3 v2) {}
+	void operator+= (const vec3 v2) {}
+	void operator-= (const vec3 v2) {}
+	void operator=  (const vec3 v2) {}
+	void operator== (const vec3 v2) {}
 		
 	//METHODS
 	void normalize() {}
