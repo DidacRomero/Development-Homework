@@ -59,14 +59,19 @@ public:
 	
 	}
 	void zero() { x = 0; y = 0; z = 0;}
-	bool const is_zero() { return (x==0 && x==y && z==0); }
+	bool const is_zero() { return (x==0 && y==0 && z==0); }
 	void distance_to() {}
 
-	//Basic Methods
+	//Basic GETTER Methods
 	T const getX() { return x; }
 	T const getY() { return y; }
 	T const getZ() { return z; }
 
+	//Printing Methods
+	void const printVec()
+	{
+		cout<< "	" << "x: " << x << "	" << "y: " << y << "	" << "z: " << z <<endl;
+	}
 private:
 	T x, y, z;
 
