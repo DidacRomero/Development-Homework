@@ -1,6 +1,8 @@
 #ifndef _VEC3_H_
 #define _VEC3_H_
 
+#include <cmath>
+
 template <class T>
 
 class vec3
@@ -46,11 +48,10 @@ public:
 		
 	//METHODS
 	void normalize() {}
-	void zero() {}
-	void const is_zero() {}
+	void zero() { x = 0; y = 0; z = 0;}
+	bool const is_zero() { return (x==0 && x==y && z==0); }
 	void distance_to() {}
 
-protected:
 
 private:
 	T x, y, z;
