@@ -13,40 +13,40 @@ public:
 	~vec3() {}
 
 	//OPERATORS (+,-,+=,-=,=,==)
-	vec3 operator+  (const vec3 v2) 
+	vec3 operator+  (const vec3 &v2) 
 	{ 
 		vec3 vecret;
-		vecret.x = x + v2.x;
-		vecret.y = y + v2.y;
-		vecret.z = z + v2.z;
+		vecret.x = x + v2->getX;
+		vecret.y = y + v2->getY;
+		vecret.z = z + v2->getZ;
 		return vecret;
 	}
-	vec3 operator-  (const vec3 v2) 
+	vec3 operator-  (const vec3 &v2) 
 	{
 		vec3 vecret;
-		vecret.x = x - v2.x;
-		vecret.y = y - v2.y;
-		vecret.z = z - v2.z;
+		vecret.x = x - v2->getX;
+		vecret.y = y - v2->getY;
+		vecret.z = z - v2->getZ;
 		return vecret;
 	}
-	void operator+= (const vec3 v2) 
+	void operator+= (const vec3 &v2) 
 	{
-		x += v2.x;
-		y += v2.y;
-		z += v2.z;
+		x += v2->getX;
+		y += v2->getY;
+		z += v2->getZ;
 	}
-	void operator-= (const vec3 v2) 
+	void operator-= (const vec3 &v2) 
 	{
-		x += v2.x;
-		y += v2.y;
-		z += v2.z;
+		x += v2->getX;
+		y += v2->getY;
+		z += v2->getZ;
 	}
-	void operator=  (const vec3 v2) {/*X*/x = v2.x;/*Y*/ y = v2.y;/*Z*/ z = v2.z;}
+	void operator=  (const vec3 &v2) {/*X*/x = v2->getX;/*Y*/ y = v2->getY;/*Z*/ z = v2->getZ;}
 	
-	bool operator== (const vec3 v2) { return (x == v2.x && y == v2.y && z == v2.z);}
+	bool operator== (const vec3 &v2) { return (x == v2->getX() && y == v2->getY && z == v2->getZ);}
 	
 		
-	//METHODS
+	// HOMEWORK METHODS
 	void normalize() 
 	{
 		T mod = sqrt(x*x+y*y+z*z);
@@ -59,6 +59,10 @@ public:
 	bool const is_zero() { return (x==0 && x==y && z==0); }
 	void distance_to() {}
 
+	//Basic Methods
+	T const getX() { return x; }
+	T const getY() { return y; }
+	T const getZ() { return z; }
 
 private:
 	T x, y, z;
