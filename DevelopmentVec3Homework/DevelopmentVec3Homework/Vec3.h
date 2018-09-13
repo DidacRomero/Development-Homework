@@ -7,21 +7,27 @@ class Vec3
 {
 public:
 	
+	Vec3() {}
+	~Vec3() {}
 
-
+	//OPERATORS
+	void operator+ ()
+	void operator- ()
+	void operator+= ()
+	void operator-= ()
+	void operator= ()
+	void operator== ()
+		
+	//METHODS
+	void normalize() {}
+	void zero() {}
+	void const is_zero() {}
+	void distance_to() {}
 
 protected:
 
-
-
-
-
-
 private:
-
-
-
-
+	T x, y, z;
 
 };
 
