@@ -47,7 +47,14 @@ public:
 	
 		
 	//METHODS
-	void normalize() {}
+	void normalize() 
+	{
+		T mod = sqrt(x*x+y*y+z*z);
+		x = x / mod;
+		y = y / mod;
+		z = z / mod;
+	
+	}
 	void zero() { x = 0; y = 0; z = 0;}
 	bool const is_zero() { return (x==0 && x==y && z==0); }
 	void distance_to() {}
