@@ -9,7 +9,7 @@ class vec3
 {
 public:
 	
-	//Default Constructor sets the vec3 to 0 value for x,y,z.
+	//Default Constructor sets the vec3 to value 0 for x,y,z.
 	vec3() { x = y = z = 0; }
 	vec3(T newX, T newY, T newZ) { x = newX; y = newY; z = newZ; }
 	vec3(const vec3 &vecToCopy) { x = vecToCopy.x; y = vecToCopy.y; z = vecToCopy.z; }
@@ -27,26 +27,26 @@ public:
 	vec3 operator-  (const vec3 &v2) 
 	{
 		vec3 vecret;
-		vecret.x = x - v2->getX;
-		vecret.y = y - v2->getY;
-		vecret.z = z - v2->getZ;
+		vecret.x = x - v2.x;
+		vecret.y = y - v2.y;
+		vecret.z = z - v2.z;
 		return vecret;
 	}
 	void operator+= (const vec3 &v2) 
 	{
-		x += v2->getX;
-		y += v2->getY;
-		z += v2->getZ;
+		x += v2.x;
+		y += v2.y;
+		z += v2.z;
 	}
 	void operator-= (const vec3 &v2) 
 	{
-		x += v2->getX;
-		y += v2->getY;
-		z += v2->getZ;
+		x += v2.x;
+		y += v2.y;
+		z += v2.z;
 	}
 	void operator=  (const vec3 &v2) {/*X*/x = v2.x;/*Y*/ y = v2.y;/*Z*/ z = v2.z;}
 	
-	bool operator== (const vec3 &v2) { return (x == v2->getX() && y == v2->getY && z == v2->getZ);}
+	bool operator== (const vec3 &v2) { return (x == v2.x && y == v2.y && z == v2.z);}
 	
 		
 	// HOMEWORK METHODS
@@ -71,6 +71,15 @@ public:
 	void const printVec()
 	{
 		cout<< "	" << "x: " << x << "	" << "y: " << y << "	" << "z: " << z <<endl;
+	}
+
+	void const printAllVecs(vec3 vecArr[6])
+	{
+		for (int i = 0; i < 6; ++i)
+		{
+			cout << "Vector " << i << ": " << endl;
+			vecArr[i].printVec();
+		}
 	}
 private:
 	T x, y, z;
