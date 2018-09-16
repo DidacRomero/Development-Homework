@@ -9,7 +9,7 @@ class vec3
 {
 public:
 	
-	//Default Constructor sets the vec3 to 0 value
+	//Default Constructor sets the vec3 to 0 value for x,y,z.
 	vec3() { x = y = z = 0; }
 	vec3(T newX, T newY, T newZ) { x = newX; y = newY; z = newZ; }
 	vec3(const vec3 &vecToCopy) { x = vecToCopy.x; y = vecToCopy.y; z = vecToCopy.z; }
@@ -19,9 +19,9 @@ public:
 	vec3 operator+  (const vec3 &v2) 
 	{ 
 		vec3 vecret;
-		vecret.x = x + v2->getX;
-		vecret.y = y + v2->getY;
-		vecret.z = z + v2->getZ;
+		vecret.x = x + v2.x;
+		vecret.y = y + v2.y;
+		vecret.z = z + v2.z;
 		return vecret;
 	}
 	vec3 operator-  (const vec3 &v2) 
@@ -44,7 +44,7 @@ public:
 		y += v2->getY;
 		z += v2->getZ;
 	}
-	void operator=  (const vec3 &v2) {/*X*/x = v2->getX;/*Y*/ y = v2->getY;/*Z*/ z = v2->getZ;}
+	void operator=  (const vec3 &v2) {/*X*/x = v2.x;/*Y*/ y = v2.y;/*Z*/ z = v2.z;}
 	
 	bool operator== (const vec3 &v2) { return (x == v2->getX() && y == v2->getY && z == v2->getZ);}
 	
