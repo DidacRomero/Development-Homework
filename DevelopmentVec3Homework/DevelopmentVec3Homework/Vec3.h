@@ -60,7 +60,7 @@ public:
 	}
 	void zero() { x = 0; y = 0; z = 0;}
 	bool const is_zero() { return (x==0 && y==0 && z==0); }
-	void distance_to() {}
+	T distance_to(const vec3 &v2) { return sqrt((v2.x - x) ^ 2 + (v2.y - y) ^ 2 + (v2.z - z) ^ 2); }
 
 	//Basic GETTER Methods
 	T const getX() { return x; }
