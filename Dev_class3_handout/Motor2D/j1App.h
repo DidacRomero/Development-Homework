@@ -48,19 +48,20 @@ public:
 	// that can be called anytime, even if they 
 	// will one execute by the very end of the frame
 	// Load / Save
-	void save()
+	bool must_save = false;
+	bool must_load = false;
+	void Save()
 	{
 		must_save = true;
 	}
-
-	void load()
+	void Load()
 	{
 		must_load = true;
 	}
 private:
 
-	void real_save();
-	void real_load();
+	void real_save() {}
+	void real_load() {}
 	// Load config file
 	bool LoadConfig();
 
@@ -88,7 +89,7 @@ public:
 	j1Textures*			tex;
 	j1Audio*			audio;
 	j1Scene*			scene;
-	
+
 private:
 
 	p2List<j1Module*>	modules;
@@ -103,8 +104,6 @@ private:
 	p2SString			title;
 	p2SString			organization;
 
-	bool must_save = false;
-	bool must_load = false;
 };
 
 extern j1App* App;

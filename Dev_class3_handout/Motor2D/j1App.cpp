@@ -122,14 +122,6 @@ bool j1App::Update()
 }
 
 
-void j1App::real_load()
-{
-
-}
-void j1App::real_save()
-{
-
-}
 // ---------------------------------------------
 bool j1App::LoadConfig()
 {
@@ -163,13 +155,14 @@ void j1App::FinishUpdate()
 	if (must_save == true)
 	{
 
-
 	}
 	if (must_load == true)
 	{
+
 	}
 }
-	// Call modules before each loop iteration
+
+// Call modules before each loop iteration
 bool j1App::PreUpdate()
 {
 	bool ret = true;
