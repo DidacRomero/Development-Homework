@@ -289,6 +289,7 @@ const char* j1App::GetOrganization() const
 	 p2List_item<j1Module*>* item;
 	 item = modules.start;
 
+	 loadXMLFile(save_file,"saveFile.xml");
 	 while (item != NULL)
 	 {
 		 item->data->module_Load(save_file, App->save);
@@ -300,7 +301,7 @@ const char* j1App::GetOrganization() const
 
 // TODO 5: Create a method to actually load an xml file
 // then call all the modules to load themselves
-void loadXMLFile(pugi::xml_document &file,char* path)
+void j1App::loadXMLFile(pugi::xml_document &file,char* path)
 {
 	pugi::xml_parse_result result = file.load_file(path);
 	LOG("Attempting to Load XML SAVE FILE ===========================");

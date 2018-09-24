@@ -62,6 +62,8 @@ private:
 
 	void real_save();						// Call the function that SAVES the module from every module
 	void real_load();						// Call the function that LOADS the module from every module
+
+	void loadXMLFile(pugi::xml_document &file, char* path);
 	// Load config file
 	bool LoadConfig();
 
