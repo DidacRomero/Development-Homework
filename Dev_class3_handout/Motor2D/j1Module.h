@@ -60,7 +60,14 @@ public:
 	}
 
 	// TODO 3: Create new virtual methods to Load and Save
-
+	virtual bool module_Save()
+	{
+		return false;
+	}
+	virtual bool module_Load() 
+	{
+		return false;
+	}
 public:
 
 	p2SString	name;

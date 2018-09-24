@@ -60,8 +60,28 @@ public:
 	}
 private:
 
-	void real_save() {}
-	void real_load() {}
+	void real_save()						// Call the function that SAVES the module from every module
+	{
+		p2List_item<j1Module*>* item;
+		item = modules.start;
+
+		while (item != NULL)
+		{
+			item->data->module_Save();
+			item = item->next;
+		}
+	}
+	void real_load()						// Call the function that LOADS the module from every module
+	{
+		p2List_item<j1Module*>* item;
+		item = modules.start;
+
+		while (item != NULL)
+		{
+			item->data->module_Load();
+			item = item->next;
+		}
+	}
 	// Load config file
 	bool LoadConfig();
 
