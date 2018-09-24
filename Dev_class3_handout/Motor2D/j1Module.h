@@ -60,11 +60,11 @@ public:
 	}
 
 	// TODO 3: Create new virtual methods to Load and Save
-	virtual bool module_Save()
+	virtual bool module_Save(pugi::xml_document &saveFile, pugi::xml_node save)
 	{
 		return false;
 	}
-	virtual bool module_Load() 
+	virtual bool module_Load(pugi::xml_document &loadFile, pugi::xml_node load)
 	{
 		return false;
 	}

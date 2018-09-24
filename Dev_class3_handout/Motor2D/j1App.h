@@ -60,28 +60,8 @@ public:
 	}
 private:
 
-	void real_save()						// Call the function that SAVES the module from every module
-	{
-		p2List_item<j1Module*>* item;
-		item = modules.start;
-
-		while (item != NULL)
-		{
-			item->data->module_Save();
-			item = item->next;
-		}
-	}
-	void real_load()						// Call the function that LOADS the module from every module
-	{
-		p2List_item<j1Module*>* item;
-		item = modules.start;
-
-		while (item != NULL)
-		{
-			item->data->module_Load();
-			item = item->next;
-		}
-	}
+	void real_save();						// Call the function that SAVES the module from every module
+	void real_load();						// Call the function that LOADS the module from every module
 	// Load config file
 	bool LoadConfig();
 
@@ -110,6 +90,9 @@ public:
 	j1Audio*			audio;
 	j1Scene*			scene;
 
+	//TODO 5 XML DOCUMENT AND NODE
+	pugi::xml_document	save_file;
+	pugi::xml_node		save;
 private:
 
 	p2List<j1Module*>	modules;
@@ -124,6 +107,7 @@ private:
 	p2SString			title;
 	p2SString			organization;
 
+	
 };
 
 extern j1App* App;

@@ -272,11 +272,46 @@ const char* j1App::GetOrganization() const
 	return organization.GetString();
 }
 
+ void j1App::real_save()						// Call the function that SAVES the module from every module
+{
+	p2List_item<j1Module*>* item;
+	item = modules.start;
+
+	while (item != NULL)
+	{
+		item->data->module_Save(save_file,App->save);
+		item = item->next;
+	}
+}
+
+ void j1App::real_load()						// Call the function that LOADS the module from every module
+ {
+	 p2List_item<j1Module*>* item;
+	 item = modules.start;
+
+	 while (item != NULL)
+	 {
+		 item->data->module_Load(save_file, App->save);
+		 item = item->next;
+	 }
+ }
 
 // TODO 4: Create a simulation of the xml file to read 
 
 // TODO 5: Create a method to actually load an xml file
 // then call all the modules to load themselves
-
+void loadXMLFile(pugi::xml_document &file,char* path)
+{
+	pugi::xml_parse_result result = file.load_file(path);
+	LOG("Attempting to Load XML SAVE FILE ===========================");
+	if (result)
+	{
+		LOG("Save File was opened correctly!");
+		App->save = App->save_file.first_child();
+	}
+	else {
+		LOG("Save File couldn't be open/hasn't been found! :(");
+	}
+}
 // TODO 7: Create a method to save the current state
 
