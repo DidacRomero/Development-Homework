@@ -95,6 +95,7 @@ public:
 	//TODO 5 XML DOCUMENT AND NODE
 	pugi::xml_document	save_file;
 	pugi::xml_node		save;
+	pugi::xml_node		renderer_save;
 private:
 
 	p2List<j1Module*>	modules;

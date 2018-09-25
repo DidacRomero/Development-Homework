@@ -309,6 +309,7 @@ void j1App::loadXMLFile(pugi::xml_document &file,char* path)
 	{
 		LOG("Save File was opened correctly!");
 		App->save = App->save_file.first_child();
+		App->renderer_save = App->save_file.child("renderer");
 	}
 	else {
 		LOG("Save File couldn't be open/hasn't been found! :(");
