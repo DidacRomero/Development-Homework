@@ -17,11 +17,11 @@ struct TileSet
 };
 
 // TODO 1: Create a struct needed to hold the information to Map node
-struct mapinfo
+struct mapInfo
 {
 	enum orientation
 	{
-		Orientation_Error=-1,orthogonal, isometric,hexagonal
+		Orientation_Error = -1,orthogonal, isometric,hexagonal
 	};
 
 	enum render_order
@@ -63,7 +63,7 @@ private:
 public:
 
 	// TODO 1: Add your struct for map info as public for now
-	mapinfo Map;
+	mapInfo Map;
 
 private:
 
