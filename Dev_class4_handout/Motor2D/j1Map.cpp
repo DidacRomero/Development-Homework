@@ -33,7 +33,13 @@ void j1Map::Draw()
 
 	// TODO 6: Iterate all tilesets and draw all their 
 	// images in 0,0 (you should have only one tileset for now)
-
+	//Hardcoded RECT I just want to go to sleep
+	SDL_Rect default_Rect;
+	default_Rect.x = 0;
+	default_Rect.y = 0;
+	default_Rect.w = 265;
+	default_Rect.h = 199;
+	App->render->Blit(tileset.Tex,0,0,&default_Rect);
 }
 
 // Called before quitting
@@ -43,7 +49,7 @@ bool j1Map::CleanUp()
 
 	// TODO 2: Make sure you clean up any memory allocated
 	// from tilesets / map
-
+	App->tex->UnLoad(tileset.Tex);
 
 	map_file.reset();
 
@@ -73,13 +79,14 @@ bool j1Map::Load(const char* file_name)
 
 	// TODO 4: Create and call a private function to load a tileset
 	// remember to support more any number of tilesets!
-	for (map_node = map_file.child("map").child("tileset"); map_node; map_node = map_node.next_sibling("tileset"))
-	{
-		LoadTileSet();
-	}
+	
 
 	if(ret == true)
 	{
+		for (map_node = map_file.child("map").child("tileset"); map_node; map_node = map_node.next_sibling("tileset"))
+		{
+			LoadTileSet();
+		}
 		// TODO 5: LOG all the data loaded
 		// iterate all tilesets and LOG everything
 		
