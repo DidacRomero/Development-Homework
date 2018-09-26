@@ -68,6 +68,7 @@ bool j1Map::Load(const char* file_name)
 	{
 		// TODO 3: Create and call a private function to load and fill
 		// all your map data
+		LoadMap();
 	}
 
 	// TODO 4: Create and call a private function to load a tileset
@@ -85,3 +86,11 @@ bool j1Map::Load(const char* file_name)
 	return ret;
 }
 
+bool j1Map::LoadMap()
+{
+	Map.width = map_file.first_child().attribute("width").as_uint();
+	Map.height = map_file.first_child().attribute("height").as_uint();
+	Map.tilewidth = map_file.first_child().attribute("tilewidth").as_uint();
+	Map.tileheight = map_file.first_child().attribute("tileheight").as_uint();
+	return false;
+}

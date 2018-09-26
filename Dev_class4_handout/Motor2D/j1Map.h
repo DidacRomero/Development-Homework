@@ -21,12 +21,12 @@ struct mapinfo
 {
 	enum orientation
 	{
-	error=-1,orthogonal, isometric,hexagonal
+		Orientation_Error=-1,orthogonal, isometric,hexagonal
 	};
 
 	enum render_order
 	{
-		error = -1, right_down, right_up, left_down,left_up
+		Render_Order_Error = -1, right_down, right_up, left_down,left_up
 	};
 	
 	unsigned int width, height, tilewidth, tileheight;
@@ -57,7 +57,8 @@ public:
 	bool Load(const char* path);
 
 private:
-
+	//TODO 3 (MYSELF)
+	bool LoadMap();
 
 public:
 
@@ -67,6 +68,7 @@ public:
 private:
 
 	pugi::xml_document	map_file;
+	//pugi::xml_node map_node;
 	p2SString			folder;
 	bool				map_loaded;
 };
