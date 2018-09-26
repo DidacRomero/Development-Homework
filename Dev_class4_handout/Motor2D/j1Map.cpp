@@ -73,12 +73,13 @@ bool j1Map::Load(const char* file_name)
 
 	// TODO 4: Create and call a private function to load a tileset
 	// remember to support more any number of tilesets!
-	
+	LoadTileSet();
 
 	if(ret == true)
 	{
 		// TODO 5: LOG all the data loaded
 		// iterate all tilesets and LOG everything
+		
 	}
 
 	map_loaded = ret;
@@ -97,4 +98,19 @@ bool j1Map::LoadMap()
 	return false;
 
 	return true;
+}
+
+bool j1Map::LoadTileSet()
+{
+	map_node = map_file.first_child().child("tileset");
+	
+	tileset.firstgid = map_node.attribute("firstgid").as_uint();
+	tileset.tilewidth = map_node.attribute("tilewidth").as_uint();
+	tileset.tileheight = map_node.attribute("tileheight").as_uint();
+	tileset.spacing = map_node.attribute("spacing").as_uint();
+	tileset.margin = map_node.attribute("margin").as_uint();
+
+	tileset.Tex = App->tex->Load(map_node.child("image").attribute("source").as_string());
+
+	return false;
 }
