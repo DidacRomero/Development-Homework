@@ -73,7 +73,10 @@ bool j1Map::Load(const char* file_name)
 
 	// TODO 4: Create and call a private function to load a tileset
 	// remember to support more any number of tilesets!
-	LoadTileSet();
+	for (map_node = map_file.child("map").child("tileset"); map_node; map_node = map_node.next_sibling("tileset"))
+	{
+		LoadTileSet();
+	}
 
 	if(ret == true)
 	{
@@ -102,7 +105,8 @@ bool j1Map::LoadMap()
 
 bool j1Map::LoadTileSet()
 {
-	map_node = map_file.first_child().child("tileset");
+	
+	//map_node = map_file.first_child().child("tileset");
 	
 	tileset.firstgid = map_node.attribute("firstgid").as_uint();
 	tileset.tilewidth = map_node.attribute("tilewidth").as_uint();
