@@ -34,12 +34,14 @@ void j1Map::Draw()
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
 	
 	
-	for (data.tilesets.At = data.tilesets.start; data.tilesets.At != nullptr; data.tilesets.At = data.tilesets.At.next)
+	
+	for (int i=0; App->map->data.tilesets.At(i) != nullptr; ++i)
 	{
-		for (int i = 0; data.MapLay.At.data.tile[i] < (data.MapLay.At.width * data.MapLay.At.height); ++i )
-		{
-			//Blit here the tiles (I think this is actually TODO 9)
-		}
+		//for (int j = 0; j < (data.MapLay.At(i).width * data.MapLay.At(i).height); ++j);//(data.MapLay.At[i].width * data.MapLay.At[i].height); ++j )
+		//{
+		//	//Blit here the tiles (I think this is actually TODO 9)
+		//	//data.MapLay.At(i)->data[j]
+		//}
 	}
 		// TODO 9: Complete the draw function
 

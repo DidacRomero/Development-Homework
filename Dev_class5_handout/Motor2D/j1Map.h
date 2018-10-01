@@ -18,7 +18,10 @@ struct MapLayer
 	~MapLayer()
 	{
 		if (data != nullptr)
+		{
 			delete data;
+			data = nullptr;
+		}
 	}
 };
 
