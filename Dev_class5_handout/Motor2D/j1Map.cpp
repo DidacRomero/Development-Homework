@@ -32,7 +32,15 @@ void j1Map::Draw()
 		return;
 
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
-
+	
+	
+	for (data.tilesets.At = data.tilesets.start; data.tilesets.At != nullptr; data.tilesets.At = data.tilesets.At.next)
+	{
+		for (int i = 0; data.MapLay.At.data.tile[i] < (data.MapLay.At.width * data.MapLay.At.height); ++i )
+		{
+			//Blit here the tiles (I think this is actually TODO 9)
+		}
+	}
 		// TODO 9: Complete the draw function
 
 }
@@ -135,7 +143,15 @@ bool j1Map::Load(const char* file_name)
 
 	// TODO 4: Iterate all layers and load each of them
 	// Load layer info ----------------------------------------------
-
+	
+	pugi::xml_node layer;
+	
+	for (layer = map_file.child("map").child("layer"); layer && ret; layer = layer.next_sibling("layer"))
+	{
+		MapLayer* l = new MapLayer;
+		LoadLayer(layer, l);
+		data.MapLay.add(l);
+	}
 
 	//memset (Old School function) can give a value as in a for simply assigning values, but does everything in 1 single cycle. 
 
@@ -303,6 +319,21 @@ bool j1Map::LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set)
 }
 
 // TODO 3: Create the definition for a function that loads a single layer
-//bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
-//{
-//}
+bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
+{
+	layer->height = node.attribute("height").as_uint();
+	layer->width = node.attribute("width").as_uint();
+		//Allocating the array which will contain the gid of each tile in the map
+	layer->data = new unsigned int [layer->width*layer->height];
+		//Setting all members of the array to 0
+	memset(layer->data,0u, layer->width*layer->height);
+
+	//node = node.child("data").child("tile");
+		//Passing gid from every tile to the members of the array
+	for (int i = 0; i < layer->width*layer->height; ++i)
+	{
+		layer->data[i] = node.attribute("gid").as_uint();
+		node = node.next_sibling("tile");
+	}
+	return false;
+}
