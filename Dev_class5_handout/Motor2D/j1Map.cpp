@@ -33,16 +33,30 @@ void j1Map::Draw()
 
 	// TODO 5: Prepare the loop to draw all tilesets + Blit
 	
+	/*SDL_Rect tile_1;
+	tile_1.x;
+	tile_1.y;
+	tile_1.w = ;
+	tile_1.h;*/
+
+	SDL_Rect tile_1 = {166,100, data.tile_width, data.tile_height};
+	App->render->Blit(data.tilesets.start->data->texture, 0, 0, &tile_1);
 	
 	
-	for (int i=0; App->map->data.tilesets.At(i) != nullptr; ++i)
-	{
-		//for (int j = 0; j < (data.MapLay.At(i).width * data.MapLay.At(i).height); ++j);//(data.MapLay.At[i].width * data.MapLay.At[i].height); ++j )
-		//{
-		//	//Blit here the tiles (I think this is actually TODO 9)
-		//	//data.MapLay.At(i)->data[j]
-		//}
-	}
+	//for (int y=0; App->map->data.tilesets.At(y) != nullptr; ++y)
+	//{
+	//	/*SDL_Rect* tile_1 = new SDL_Rect;
+	//	tile_1.x = 165;
+	//	tile_1.y = 99;
+	//	tile_1.w = data.tile_width;
+	//	tile_1.h = data.tile_height;*/
+	//	for (int j = 0; j < (data.width * data.height); ++j);//(data.MapLay.At[i].width * data.MapLay.At[i].height); ++j )
+	//	{
+	//		//Blit here the tiles (I think this is actually TODO 9)
+	//		App->render->Blit(App->map->data.tilesets.At(y)->data->texture,
+	//			0, 0, {});
+	//	}
+	//}
 		// TODO 9: Complete the draw function
 
 }
@@ -338,4 +352,14 @@ bool j1Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 		node = node.next_sibling("tile");
 	}
 	return false;
+}
+
+SDL_Rect GetTileRectMINE(uint gid)
+{
+	SDL_Rect rectToRet;
+	rectToRet.w = App->map->data.tile_width;
+	rectToRet.h = App->map->data.tile_height;;
+	rectToRet.x;
+	rectToRet.y;
+	return SDL_Rect();
 }
