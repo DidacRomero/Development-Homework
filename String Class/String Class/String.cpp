@@ -13,7 +13,8 @@ String::String(const String &string_class): String(string_class.string) {}
 //DESTRUCTOR
 String::~String() 
 {
-	clear();
+	if (string != nullptr)
+		delete[] string;
 }
 
 //METHODS
