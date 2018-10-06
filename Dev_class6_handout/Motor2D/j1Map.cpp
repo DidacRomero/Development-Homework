@@ -41,7 +41,7 @@ void j1Map::Draw()
 
         for (int i = 0; i < layer->width;++i) {
 
-			uint gid = layer->data[i + (j* data.width)];
+			uint gid = layer->data[layer->Get(i,j)];
 			SDL_Rect rec = tileset->GetTileRect(gid);
             App->render->Blit(tileset->texture, i * tileset->tile_width, j * tileset->tile_height, &rec);
 
