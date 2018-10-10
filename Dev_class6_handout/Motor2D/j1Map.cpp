@@ -34,6 +34,7 @@ void j1Map::Draw()
 	// TODO 5(old): Prepare the loop to draw all tilesets + Blit
 	MapLayer* layer = data.layers.start->data; // for now we just use the first layer and tileset
 	TileSet* tileset = data.tilesets.start->data;
+	iPoint draw;
 
 	// TODO 10(old): Complete the draw function
 
@@ -43,7 +44,8 @@ void j1Map::Draw()
 
 			uint gid = layer->data[layer->Get(i,j)];
 			SDL_Rect rec = tileset->GetTileRect(gid);
-            App->render->Blit(tileset->texture, i * tileset->tile_width, j * tileset->tile_height, &rec);
+			draw = MapToWorld(i, j);
+            App->render->Blit(tileset->texture, draw.x, draw.y, &rec);
 
         }
     }
@@ -73,8 +75,8 @@ iPoint j1Map::WorldToMap(int x, int y) const
 
 		// TODO 3: Add the case for isometric maps to WorldToMap
 		
-		//ret.x = (x * data.tile_height + y * data.tile_width) / (data.tile_width * data.tile_height);
-		//ret.y = (2 * y) / data.tile_height + ret.x;
+		ret.x = (x * data.tile_height + y * data.tile_width) / (data.tile_width * data.tile_height);
+		ret.y = (2 * y) / data.tile_height + ret.x;
 	}
 	return ret;
 }

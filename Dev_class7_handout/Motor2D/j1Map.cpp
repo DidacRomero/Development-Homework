@@ -66,9 +66,12 @@ TileSet* j1Map::GetTilesetFromTileId(int id) const
 	// TODO 3: Complete this method so we pick the right
 	// Tileset based on a tile id
 	int i = 0;
-	while ( i < data.tilesets.count())
+	int j = data.tilesets.count();
+	while ( i < j)
 	{
-		if (data.tilesets.At(i)->data->firstgid <= id && data.tilesets.At(i + 1)->data->firstgid > id)
+		if (data.tilesets.At(i)->data->firstgid <= id //Current tileset
+			&& ( data.tilesets.At(i) == data.tilesets.end //If this is the last tileset w're at the end of the list
+				|| data.tilesets.At(i + 1)->data->firstgid > id)) // If we're not in the last check that id < next tileset first id
 			break;
 		++i;
 	}
