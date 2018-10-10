@@ -34,8 +34,9 @@ void j1Map::Draw()
 	// TODO 4: Make sure we draw all the layers and not just the first one
 
 	MapLayer* layer; /*= this->data.layers.start->data;*/
-	int i = 0;
-	while (i<2)
+	
+	int j = this->data.layers.count();
+	for (int i = 0; i < j; ++i)
 	{
 		layer = this->data.layers.At(i)->data;
 		for (int y = 0; y < data.height; ++y)
@@ -56,7 +57,6 @@ void j1Map::Draw()
 				}
 			}
 		}
-		++i;
 	}
 	
 }
@@ -420,6 +420,17 @@ bool j1Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 
 	// TODO 6: Fill in the method to fill the custom properties from 
 	// an xml_node
+
+	node.first_child() = node.child("layer").child("Properties");
+
+	int j = properties.PropertyList.count();
+	for (int i = 0; i < j; ++i)
+	{
+		properties.PropertyList[i]->name = node.attribute("Name").as_string();
+		properties.PropertyList[i]->propertyValue = node.attribute("Value").as_int();
+	}
+
+
 
 	return ret;
 }
