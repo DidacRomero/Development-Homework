@@ -24,6 +24,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 	folder.create(config.child("folder").child_value());
 	ResetBFS();
 
+
 	return ret;
 }
 
@@ -33,46 +34,67 @@ void j1Map::ResetBFS()
 	visited.clear();
 	frontier.Push(iPoint(19, 4));
 	visited.add(iPoint(19, 4));
+	//@Dídac
+	tile_found = false;
+	target_tile.create(15,2);
 }
 
 void j1Map::PropagateBFS()
 {
+	//Hardcoded a value as the tile we want to stop in
+	
 	// TODO 1: If frontier queue contains elements
 	// pop the last one and calculate its 4 neighbors
 	iPoint frontierFirst;
-	iPoint frontier1;
-	iPoint frontier2;
-	iPoint frontier3;
-	iPoint frontier4;
+
+	//pathTile
 
 	iPoint frontiers[4];
 
-	if (frontier.Count() > 0)
+	if (tile_found == false)
 	{
-		frontier.Pop(frontierFirst);
-	
-		frontiers[0] = (frontierFirst); //Check the tile at the right
-		frontiers[0] += {1,0};
-
-		frontiers[1] = (frontierFirst); //Check the tile at the top
-		frontiers[1] += {0, 1};
-
-		frontiers[2] = (frontierFirst); //Check the tile at the left
-		frontiers[2] += {-1, 0};
-
-		frontiers[3] = (frontierFirst); //Check the tile at the right
-		frontiers[3] += {0, -1};
-	}
-	// TODO 2: For each neighbor, if not visited, add it
-	// to the frontier queue and visited list
-	for (int i = 0; i < 4; ++i)
-	{
-		if (visited.find(frontiers[i]) == -1 && IsWalkable(frontiers[i].x, frontiers[i].y))
+		if (frontier.Count() > 0)
 		{
-			visited.add(frontiers[i]);
-			frontier.Push(frontiers[i]);
+			frontier.Pop(frontierFirst);
+
+			frontiers[0] = (frontierFirst); //Check the tile at the right
+			frontiers[0] += {1, 0};
+
+			frontiers[1] = (frontierFirst); //Check the tile at the top
+			frontiers[1] += {0, 1};
+
+			frontiers[2] = (frontierFirst); //Check the tile at the left
+			frontiers[2] += {-1, 0};
+
+			frontiers[3] = (frontierFirst); //Check the tile at the right
+			frontiers[3] += {0, -1};
+		}
+		// TODO 2: For each neighbor, if not visited, add it
+		// to the frontier queue and visited list
+		for (int i = 0; i < 4; ++i)
+		{
+			if (visited.find(frontiers[i]) == -1 && IsWalkable(frontiers[i].x, frontiers[i].y))
+			{
+				visited.add(frontiers[i]);
+				frontier.Push(frontiers[i]);
+			}
+		}
+		
+		if (visited.find(target_tile) != -1)
+		{
+			tile_found = true;
 		}
 	}
+	else
+	{
+		TileSet* tileset = GetTilesetFromTileId(25);
+
+		SDL_Rect r = tileset->GetTileRect(25);
+		iPoint pos = MapToWorld(target_tile.x, target_tile.y);
+
+		App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+	}
+	
 	
 }
 

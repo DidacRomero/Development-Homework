@@ -7,6 +7,18 @@
 #include "p2Point.h"
 #include "j1Module.h"
 
+
+
+//Made_for_Pathfinding-----------------------------------
+
+struct pathTile
+{
+	iPoint* tile;
+
+	//Origin and next Tile
+	iPoint* originTile;
+	iPoint* nextTile;
+};
 // ----------------------------------------------------
 struct Properties
 {
@@ -152,6 +164,10 @@ private:
 	/// BFS
 	p2Queue<iPoint>		frontier;
 	p2List<iPoint>		visited;
+
+	///BFS PathFinding
+	bool tile_found;
+	iPoint target_tile;
 };
 
 #endif // __j1MAP_H__
