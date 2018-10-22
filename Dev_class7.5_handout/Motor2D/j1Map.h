@@ -13,11 +13,14 @@
 
 struct pathTile
 {
-	iPoint* tile;
+	pathTile() { 
+		originTile = nextTile = nullptr;
+	}
+	iPoint tile;
 
 	//Origin and next Tile
-	iPoint* originTile;
-	iPoint* nextTile;
+	pathTile* originTile;
+	pathTile* nextTile;
 };
 // ----------------------------------------------------
 struct Properties
@@ -166,8 +169,10 @@ private:
 	p2List<iPoint>		visited;
 
 	///BFS PathFinding
+	iPoint first_tile;
 	bool tile_found;
 	iPoint target_tile;
+	p2List<pathTile*> path_tile_list;
 };
 
 #endif // __j1MAP_H__

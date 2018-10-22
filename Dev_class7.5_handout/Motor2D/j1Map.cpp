@@ -36,7 +36,12 @@ void j1Map::ResetBFS()
 	visited.add(iPoint(19, 4));
 	//@Dídac
 	tile_found = false;
+	first_tile.create(19, 4);
 	target_tile.create(15,2);
+	//Create the first pathTile of the list
+	pathTile* init = new pathTile;
+	init->tile = first_tile;
+	path_tile_list.add(init);
 }
 
 void j1Map::PropagateBFS()
@@ -51,23 +56,44 @@ void j1Map::PropagateBFS()
 
 	iPoint frontiers[4];
 
+	pathTile* frontierTiles[4];
+
+	for (int i = 0; i < 4; ++i) // Assign the pathTiles in memory
+	{
+		frontierTiles[i] = new pathTile;
+	}
+
 	if (tile_found == false)
 	{
 		if (frontier.Count() > 0)
 		{
 			frontier.Pop(frontierFirst);
-
+			
+			
 			frontiers[0] = (frontierFirst); //Check the tile at the right
 			frontiers[0] += {1, 0};
+			frontierTiles[0]->tile = frontiers[0]; // Assign the iPoint of the actual tile to the PathTile
 
 			frontiers[1] = (frontierFirst); //Check the tile at the top
 			frontiers[1] += {0, 1};
+			frontierTiles[1]->tile = frontiers[1]; // Assign the iPoint of the actual tile to the PathTile
 
 			frontiers[2] = (frontierFirst); //Check the tile at the left
 			frontiers[2] += {-1, 0};
+			frontierTiles[2]->tile = frontiers[2]; // Assign the iPoint of the actual tile to the PathTile
 
 			frontiers[3] = (frontierFirst); //Check the tile at the right
 			frontiers[3] += {0, -1};
+			frontierTiles[3]->tile = frontiers[3]; // Assign the iPoint of the actual tile to the PathTile
+
+			//Assign the tile where we come from
+			int index = visited.find(frontierFirst);
+
+			for (int i = 0; i < 4; ++i)
+			{
+				frontierTiles[i]->originTile = path_tile_list.At(index)->data;
+				path_tile_list.add(frontierTiles[i]);
+			}
 		}
 		// TODO 2: For each neighbor, if not visited, add it
 		// to the frontier queue and visited list
