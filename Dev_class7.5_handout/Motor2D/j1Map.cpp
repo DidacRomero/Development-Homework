@@ -40,6 +40,7 @@ void j1Map::ResetBFS()
 	target_tile.create(15,2);
 	//Create the first pathTile of the list
 	pathTile* init = new pathTile;
+	init->originTile = nullptr;
 	init->tile = first_tile;
 	path_tile_list.add(init);
 }
@@ -86,13 +87,13 @@ void j1Map::PropagateBFS()
 			frontiers[3] += {0, -1};
 			frontierTiles[3]->tile = frontiers[3]; // Assign the iPoint of the actual tile to the PathTile
 
-			//Assign the tile where we come from
+			//Assign the tile where we come from (index)
 			int index = visited.find(frontierFirst);
 
 			for (int i = 0; i < 4; ++i)
 			{
-				frontierTiles[i]->originTile = path_tile_list.At(index)->data;
-				path_tile_list.add(frontierTiles[i]);
+				frontierTiles[i]->originTile = path_tile_list.At(index)->data; //Assign the tile where we come from
+				path_tile_list.add(frontierTiles[i]); // Add the new element to the list of PathTiles
 			}
 		}
 		// TODO 2: For each neighbor, if not visited, add it
@@ -119,6 +120,17 @@ void j1Map::PropagateBFS()
 		iPoint pos = MapToWorld(target_tile.x, target_tile.y);
 
 		App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+	}
+
+	//If we have found the tile we're looking for reconstruct the Path
+	if (tile_found == true)
+	{
+		pathTile* current_tile = path_tile_list.end->data ;
+		while (current_tile->originTile != nullptr)	//The loop will end when we reach the initial Tile
+		{
+			current_tile->originTile->nextTile = current_tile;		//The Next Tile of our Origin Tile it's us
+			current_tile = current_tile->originTile;			//We become our Origin Tile to iterate the next step
+		}
 	}
 	
 	
