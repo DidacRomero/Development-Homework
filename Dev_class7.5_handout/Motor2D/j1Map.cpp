@@ -37,7 +37,7 @@ void j1Map::ResetBFS()
 	//@Dídac
 	tile_found = false;
 	first_tile.create(19, 4);
-	target_tile.create(15,2);
+	target_tile.create(4,20);
 	//Create the first pathTile of the list
 	pathTile* init = new pathTile;
 	init->originTile = nullptr;
@@ -69,8 +69,8 @@ void j1Map::PropagateBFS()
 		if (frontier.Count() > 0)
 		{
 			frontier.Pop(frontierFirst);
-			
-			
+
+
 			frontiers[0] = (frontierFirst); //Check the tile at the right
 			frontiers[0] += {1, 0};
 			frontierTiles[0]->tile = frontiers[0]; // Assign the iPoint of the actual tile to the PathTile
@@ -87,23 +87,27 @@ void j1Map::PropagateBFS()
 			frontiers[3] += {0, -1};
 			frontierTiles[3]->tile = frontiers[3]; // Assign the iPoint of the actual tile to the PathTile
 
-			//Assign the tile where we come from (index)
+			//Assign the tile where we come from (index later used inside the for where we make sure they're not visited)
 			int index = visited.find(frontierFirst);
 
+			// TODO 2: For each neighbor, if not visited, add it
+			// to the frontier queue and visited list
 			for (int i = 0; i < 4; ++i)
 			{
-				frontierTiles[i]->originTile = path_tile_list.At(index)->data; //Assign the tile where we come from
-				path_tile_list.add(frontierTiles[i]); // Add the new element to the list of PathTiles
-			}
-		}
-		// TODO 2: For each neighbor, if not visited, add it
-		// to the frontier queue and visited list
-		for (int i = 0; i < 4; ++i)
-		{
-			if (visited.find(frontiers[i]) == -1 && IsWalkable(frontiers[i].x, frontiers[i].y))
-			{
-				visited.add(frontiers[i]);
-				frontier.Push(frontiers[i]);
+				if (visited.find(frontiers[i]) == -1 && IsWalkable(frontiers[i].x, frontiers[i].y))
+				{
+					visited.add(frontiers[i]);
+					frontier.Push(frontiers[i]);
+					
+					
+						frontierTiles[i]->originTile = path_tile_list.At(index)->data; //Assign the tile where we come from
+						path_tile_list.add(frontierTiles[i]); // Add the new element to the list of PathTiles
+					
+				}
+				else
+				{
+					delete frontierTiles[i];
+				}
 			}
 		}
 		
@@ -168,6 +172,25 @@ void j1Map::DrawBFS()
 		App->render->Blit(tileset->texture, pos.x, pos.y, &r);
 	}
 
+	
+	if (tile_found == true)
+	{
+		//Print the reconstructed Path
+		pathTile* current_tile = path_tile_list.start->data;
+		while (current_tile->tile != path_tile_list.end->data->tile) // The loop will end when we reach the final Tile
+		{
+			point = current_tile->tile;
+			TileSet* tileset = GetTilesetFromTileId(25);
+
+			SDL_Rect r = tileset->GetTileRect(25);
+			iPoint pos = MapToWorld(point.x, point.y);
+
+			App->render->Blit(tileset->texture, pos.x, pos.y, &r);
+
+			current_tile = current_tile->nextTile;
+		}
+		
+	}
 }
 
 bool j1Map::IsWalkable(int x, int y) const
