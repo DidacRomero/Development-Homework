@@ -98,6 +98,7 @@ void j1Map::PropagateBFS()
 				{
 					frontier.Push(neighbors[i], 0);
 					visited.add(neighbors[i]);
+					breadcrumbs.add(curr);
 				}
 			}
 		}
