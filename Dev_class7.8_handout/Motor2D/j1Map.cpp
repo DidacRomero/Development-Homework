@@ -49,8 +49,17 @@ void j1Map::Path(int x, int y)
 	path.Clear();
 	iPoint goal = WorldToMap(x, y);
 
-	// TODO 2: Follow the breadcrumps to goal back to the origin
-	// add each step into "path" dyn array (it will then draw automatically)
+	if (visited.find(goal) != -1)
+	{
+		// TODO 2: Follow the breadcrumps to goal back to the origin
+		// add each step into "path" dyn array (it will then draw automatically)
+		iPoint current = goal;
+		while (current != visited.start->data)
+		{
+			path.PushBack(current);			//Add the current tile (iPoint) to the path dynArray
+			current = breadcrumbs.At(visited.find(current))->data;	//Iterate: we become the tile in breadcrumbs equivalent to our index in visited
+		}
+	}
 }
 
 void j1Map::PropagateDijkstra()
