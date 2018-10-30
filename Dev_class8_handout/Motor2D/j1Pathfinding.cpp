@@ -176,8 +176,26 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	// TODO 2: Create two lists: open, close
 	// Add the origin tile to open
 	// Iterate while we have tile in the open list
+	PathList open;
+	PathList closed;
 
-	// TODO 3: Move the lowest score cell from open list to the closed list
+	PathNode origin_node = {0,0,origin,nullptr};
+	
+	open.list.add(origin_node);
+
+	//p2List_item<PathNode> aux_path_node;
+	p2List_item<PathNode>* aux_path_node;
+
+	while (open.list.start != nullptr)
+	{
+		// TODO 3: Move the lowest score cell from open list to the closed list
+		aux_path_node = open.GetNodeLowestScore();
+		open.list.del(aux_path_node);
+	
+		closed.list.add(aux_path_node->data);
+	}
+
+	
 	
 	// TODO 4: If we just added the destination, we are done!
 	// Backtrack to create the final path
