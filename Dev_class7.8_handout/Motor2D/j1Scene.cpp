@@ -77,11 +77,19 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
 		App->map->PropagateDijkstra();
 
+	if (App->input->GetKey(SDL_SCANCODE_U) == KEY_DOWN)
+		App->map->PropagateAStar();
+
+	if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
+		App->map->PropagateAStar();
+
 	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
 		iPoint p;
 		App->input->GetMousePosition(p.x, p.y);
-		App->map->Path(p.x - App->render->camera.x, p.y - App->render->camera.y);
+		App->map->goal = p;
+		/*App->map->goal_reached = false;*/
+		//App->map->Path(p.x - App->render->camera.x, p.y - App->render->camera.y);
 	}
 
 	App->map->Draw();
@@ -117,3 +125,5 @@ bool j1Scene::CleanUp()
 
 	return true;
 }
+
+

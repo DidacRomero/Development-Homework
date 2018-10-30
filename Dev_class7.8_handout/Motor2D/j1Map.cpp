@@ -38,10 +38,12 @@ void j1Map::ResetPath()
 	frontier.Clear();
 	visited.clear();
 	breadcrumbs.clear();
-	frontier.Push(iPoint(19, 4), 0);
-	visited.add(iPoint(19, 4));
-	breadcrumbs.add(iPoint(19, 4));
+	path_start = iPoint(19, 4);
+	frontier.Push(path_start, 0);
+	visited.add(path_start);
+	breadcrumbs.add(path_start);
 	memset(cost_so_far, 0, sizeof(uint) * COST_MAP * COST_MAP);
+	goal_reached = false;
 }
 
 void j1Map::Path(int x, int y)
@@ -62,38 +64,98 @@ void j1Map::Path(int x, int y)
 	}
 }
 
+
+void j1Map::PropagateAStar()
+{
+	// TODO 3: Taking BFS as a reference, implement the Dijkstra algorithm
+	// use the 2 dimensional array "cost_so_far" to track the accumulated costs
+	// on each cell (is already reset to 0 automatically)
+
+	if (goal_reached == false)
+	{
+		iPoint curr;
+		if (frontier.Pop(curr))
+		{
+
+			if (curr == WorldToMap(goal.x, goal.y))
+			{
+				Path(goal.x - App->render->camera.x, goal.y - App->render->camera.y);
+				goal_reached = true;
+			}
+			iPoint neighbors[4];
+			neighbors[0].create(curr.x + 1, curr.y + 0);
+			neighbors[1].create(curr.x + 0, curr.y + 1);
+			neighbors[2].create(curr.x - 1, curr.y + 0);
+			neighbors[3].create(curr.x + 0, curr.y - 1);
+
+			for (uint i = 0; i < 4; ++i)
+			{
+				if (MovementCost(neighbors[i].x, neighbors[i].y) != -1)
+				{
+				/*	if (cost_so_far[neighbors[i].x][neighbors[i].y] == 0 && neighbors[i] != path_start)
+						curr_cost = MovementCost(neighbors[i].x, neighbors[i].y) + neighbors[i].DistanceManhattan(WorldToMap(goal.x, goal.y));
+					else
+						curr_cost = MovementCost(neighbors[i].x, neighbors[i].y) + cost_so_far[curr.x][curr.y];*/
+
+					curr_cost = MovementCost(neighbors[i].x, neighbors[i].y) + neighbors[i].DistanceManhattan(WorldToMap(goal.x, goal.y));
+
+					if ((cost_so_far[neighbors[i].x][neighbors[i].y] == 0 || curr_cost < cost_so_far[neighbors[i].x][neighbors[i].y])
+						/*&& neighbors[i] != path_start*/)
+					{
+
+						cost_so_far[neighbors[i].x][neighbors[i].y] = curr_cost;
+						breadcrumbs.add(curr);
+						frontier.Push(neighbors[i], curr_cost);
+						visited.add(neighbors[i]);
+					}
+				}
+			}
+		}
+	}
+}
+
 void j1Map::PropagateDijkstra()
 {
 	// TODO 3: Taking BFS as a reference, implement the Dijkstra algorithm
 	// use the 2 dimensional array "cost_so_far" to track the accumulated costs
 	// on each cell (is already reset to 0 automatically)
 
-	iPoint curr;
-	if (frontier.Pop(curr))
+	if (goal_reached == false)
 	{
-		iPoint neighbors[4];
-		neighbors[0].create(curr.x + 1, curr.y + 0);
-		neighbors[1].create(curr.x + 0, curr.y + 1);
-		neighbors[2].create(curr.x - 1, curr.y + 0);
-		neighbors[3].create(curr.x + 0, curr.y - 1);
-
-		for (uint i = 0; i < 4; ++i)
+		iPoint curr;
+		if (frontier.Pop(curr))
 		{
-			if (MovementCost(neighbors[i].x, neighbors[i].y) != -1)
-			{
-				uint curr_cost = MovementCost(neighbors[i].x, neighbors[i].y) + cost_so_far[curr.x][curr.y];
 
-				if (cost_so_far[neighbors[i].x][neighbors[i].y] == 0 || curr_cost < cost_so_far[neighbors[i].x][neighbors[i].y])
+			if (curr == WorldToMap(goal.x, goal.y))
+			{
+				Path(goal.x - App->render->camera.x, goal.y - App->render->camera.y);
+				goal_reached = true;
+			}
+			iPoint neighbors[4];
+			neighbors[0].create(curr.x + 1, curr.y + 0);
+			neighbors[1].create(curr.x + 0, curr.y + 1);
+			neighbors[2].create(curr.x - 1, curr.y + 0);
+			neighbors[3].create(curr.x + 0, curr.y - 1);
+
+			for (uint i = 0; i < 4; ++i)
+			{
+				if (MovementCost(neighbors[i].x, neighbors[i].y) != -1)
 				{
-					cost_so_far[neighbors[i].x][neighbors[i].y] = curr_cost;
-					breadcrumbs.add(curr);
-					frontier.Push(neighbors[i], curr_cost);
-					visited.add(neighbors[i]);
+					uint curr_cost = MovementCost(neighbors[i].x, neighbors[i].y) + cost_so_far[curr.x][curr.y];
+
+					if (cost_so_far[neighbors[i].x][neighbors[i].y] == 0 || curr_cost < cost_so_far[neighbors[i].x][neighbors[i].y])
+					{
+						cost_so_far[neighbors[i].x][neighbors[i].y] = curr_cost;
+						breadcrumbs.add(curr);
+						frontier.Push(neighbors[i], curr_cost);
+						visited.add(neighbors[i]);
+					}
 				}
 			}
 		}
 	}
 }
+
 
 int j1Map::MovementCost(int x, int y) const
 {

@@ -136,6 +136,7 @@ public:
 	// Propagation style
 	void PropagateBFS();
 	void PropagateDijkstra();
+	void PropagateAStar();
 
 private:
 
@@ -151,6 +152,16 @@ public:
 
 	MapData data;
 
+	//Vars for A Star Homework
+	iPoint goal;
+	iPoint compare_distance;
+	bool goal_reached;
+
+	uint curr_cost;
+
+	iPoint path_start;
+
+
 private:
 
 	pugi::xml_document	map_file;
@@ -164,6 +175,7 @@ private:
 	uint				cost_so_far[COST_MAP][COST_MAP];
 	p2DynArray<iPoint>	path;
 	SDL_Texture*		tile_x = nullptr;
+
 };
 
 #endif // __j1MAP_H__
