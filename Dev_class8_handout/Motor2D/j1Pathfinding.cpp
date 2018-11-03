@@ -193,13 +193,29 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 		open.list.del(aux_path_node);
 	
 		closed.list.add(aux_path_node->data);
+
+	// TODO 4: If we just added the destination, we are done!
+	// Backtrack to create the final path
+	// Use the Pathnode::parent and Flip() the path when you are finish
+		if (aux_path_node->data.pos == destination)
+		{
+			last_path.Clear();
+			//Do the backtracking
+			// We will be iterating with parents which are const Pathnode *
+			 const PathNode* backTrackNode = &aux_path_node->data; 
+
+			while (backTrackNode->pos != origin)
+			{
+				last_path.PushBack(backTrackNode->pos);
+				backTrackNode = backTrackNode->parent;
+			}
+			last_path.Flip();
+		}
 	}
 
 	
 	
-	// TODO 4: If we just added the destination, we are done!
-	// Backtrack to create the final path
-	// Use the Pathnode::parent and Flip() the path when you are finish
+	
 
 	// TODO 5: Fill a list of all adjancent nodes
 
