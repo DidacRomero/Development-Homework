@@ -67,7 +67,7 @@ const p2DynArray<iPoint>* j1PathFinding::GetLastPath() const
 // PathList ------------------------------------------------------------------------
 // Looks for a node in this list and returns it's list node or NULL
 // ---------------------------------------------------------------------------------
-const p2List_item<PathNode>* PathList::Find(const iPoint& point) const
+p2List_item<PathNode>* PathList::Find(const iPoint& point) const
 {
 	p2List_item<PathNode>* item = list.start;
 	while(item)
@@ -187,23 +187,23 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	//p2List_item<PathNode> aux_path_node;
 	p2List_item<PathNode>* aux_pathNode;
 
-	while (open.list.start != nullptr)
+	while (open.list.count() > 0)
 	{
 		// TODO 3: Move the lowest score cell from open list to the closed list
 		aux_pathNode = open.GetNodeLowestScore();
-		open.list.del(aux_pathNode);
 	
-		closed.list.add(aux_pathNode->data);
+		p2List_item<PathNode>* lowest_pathNode = closed.list.add(aux_pathNode->data);
+		open.list.del(aux_pathNode);
 
 	// TODO 4: If we just added the destination, we are done!
 	// Backtrack to create the final path
 	// Use the Pathnode::parent and Flip() the path when you are finish
-		if (aux_pathNode->data.pos == destination)
+		if (lowest_pathNode->data.pos == destination)
 		{
 			last_path.Clear();
 			//Do the backtracking
 			// We will be iterating with parents which are const Pathnode *
-			 const PathNode* backTrackNode = &aux_pathNode->data; 
+			 const PathNode* backTrackNode = &lowest_pathNode->data;
 
 			while (backTrackNode->pos != origin)
 			{
@@ -211,27 +211,36 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				backTrackNode = backTrackNode->parent;
 			}
 			last_path.Flip();
-			break;	//We finished creating the Path so we end the whole loop
+			return 1;	//We finished creating the Path so we end the whole loop
 		}
 
 		// TODO 5: Fill a list of all adjancent nodes
 		adjacents.list.clear(); //We need to clear for each iteration as the adjacents will be different for each tile
-		aux_pathNode->data.FindWalkableAdjacents(adjacents);
+		lowest_pathNode->data.FindWalkableAdjacents(adjacents);
 
+		// TODO 6: Iterate adjancent nodes:
+		p2List_item<PathNode>* item = adjacents.list.start;
+		for (;item; item = item->next)
+		{
+			// Ignore nodes in the closed list
+			if (closed.Find(item->data.pos) == NULL)
+			{
+				p2List_item<PathNode>* adjacent_pathNode = open.Find(item->data.pos);
+				// If it is NOT found, calculate its F and add it to the open list
+				if (adjacent_pathNode == NULL)
+				{
+					//item->data.parent = &aux_pathNode->data;
+					item->data.CalculateF(destination);
+					open.list.add(item->data);
+				}
+				// If it is already in the open list, check if it is a better path (compare G)
+				else if (adjacent_pathNode->data.g > item->data.g + 1) // If it is a better path, Update the parent
+				{
+					adjacent_pathNode->data.parent = item->data.parent;
+					adjacent_pathNode->data.CalculateF(destination);
+				}
+			}
+		}
 	}
-
-	
-	
-	
-
-	
-
-	// TODO 6: Iterate adjancent nodes:
-	// ignore nodes in the closed list
-	// If it is NOT found, calculate its F and add it to the open list
-	// If it is already in the open list, check if it is a better path (compare G)
-	// If it is a better path, Update the parent
-
-	return -1;
 }
 
