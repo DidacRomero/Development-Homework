@@ -124,12 +124,29 @@ uint PathNode::FindWalkableAdjacents(PathList& list_to_fill) const
 	cell.create(pos.x, pos.y + 1);
 	if(App->pathfinding->IsWalkable(cell))
 		list_to_fill.list.add(PathNode(-1, -1, cell, this));
+	// north east
+	cell.create(pos.x +1, pos.y + 1);
+	if (App->pathfinding->IsWalkable(cell))
+		list_to_fill.list.add(PathNode(30, -1, cell, this));
+	// north west
+	cell.create(pos.x -1, pos.y + 1);
+	if (App->pathfinding->IsWalkable(cell))
+		list_to_fill.list.add(PathNode(30, -1, cell, this));
 
 	// south
 	cell.create(pos.x, pos.y - 1);
 	if(App->pathfinding->IsWalkable(cell))
 		list_to_fill.list.add(PathNode(-1, -1, cell, this));
 
+	// south east
+	cell.create(pos.x + 1, pos.y - 1);
+	if (App->pathfinding->IsWalkable(cell))
+		list_to_fill.list.add(PathNode(30, -1, cell, this));
+
+	//south west
+	cell.create(pos.x - 1, pos.y - 1);
+	if (App->pathfinding->IsWalkable(cell))
+		list_to_fill.list.add(PathNode(30, -1, cell, this));
 	// east
 	cell.create(pos.x + 1, pos.y);
 	if(App->pathfinding->IsWalkable(cell))
@@ -211,7 +228,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				backTrackNode = backTrackNode->parent;
 			}
 			last_path.Flip();
-			return 1;	//We finished creating the Path so we end the whole loop
+			return last_path.Count();	//We finished creating the Path so we end the whole loop
 		}
 
 		// TODO 5: Fill a list of all adjancent nodes
@@ -219,8 +236,8 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 		lowest_pathNode->data.FindWalkableAdjacents(adjacents);
 
 		// TODO 6: Iterate adjancent nodes:
-		p2List_item<PathNode>* item = adjacents.list.start;
-		for (;item; item = item->next)
+		
+		for (p2List_item<PathNode>* item = adjacents.list.start; item; item = item->next)
 		{
 			// Ignore nodes in the closed list
 			if (closed.Find(item->data.pos) == NULL)
@@ -231,6 +248,13 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				{
 					//item->data.parent = &aux_pathNode->data;
 					item->data.CalculateF(destination);
+					//Check if it's a diagonal movement
+					if (abs(item->data.pos.x - item->data.parent->pos.x) == abs(item->data.pos.y - item->data.parent->pos.y))
+					{
+						item->data.g += 1;
+						open.list.add(item->data);
+						continue;
+					}
 					open.list.add(item->data);
 				}
 				// If it is already in the open list, check if it is a better path (compare G)
