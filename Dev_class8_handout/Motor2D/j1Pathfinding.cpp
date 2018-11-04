@@ -178,31 +178,32 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 	// Iterate while we have tile in the open list
 	PathList open;
 	PathList closed;
+	PathList adjacents;
 
 	PathNode origin_node = {0,0,origin,nullptr};
 	
 	open.list.add(origin_node);
 
 	//p2List_item<PathNode> aux_path_node;
-	p2List_item<PathNode>* aux_path_node;
+	p2List_item<PathNode>* aux_pathNode;
 
 	while (open.list.start != nullptr)
 	{
 		// TODO 3: Move the lowest score cell from open list to the closed list
-		aux_path_node = open.GetNodeLowestScore();
-		open.list.del(aux_path_node);
+		aux_pathNode = open.GetNodeLowestScore();
+		open.list.del(aux_pathNode);
 	
-		closed.list.add(aux_path_node->data);
+		closed.list.add(aux_pathNode->data);
 
 	// TODO 4: If we just added the destination, we are done!
 	// Backtrack to create the final path
 	// Use the Pathnode::parent and Flip() the path when you are finish
-		if (aux_path_node->data.pos == destination)
+		if (aux_pathNode->data.pos == destination)
 		{
 			last_path.Clear();
 			//Do the backtracking
 			// We will be iterating with parents which are const Pathnode *
-			 const PathNode* backTrackNode = &aux_path_node->data; 
+			 const PathNode* backTrackNode = &aux_pathNode->data; 
 
 			while (backTrackNode->pos != origin)
 			{
@@ -210,14 +211,20 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				backTrackNode = backTrackNode->parent;
 			}
 			last_path.Flip();
+			break;	//We finished creating the Path so we end the whole loop
 		}
+
+		// TODO 5: Fill a list of all adjancent nodes
+		adjacents.list.clear(); //We need to clear for each iteration as the adjacents will be different for each tile
+		aux_pathNode->data.FindWalkableAdjacents(adjacents);
+
 	}
 
 	
 	
 	
 
-	// TODO 5: Fill a list of all adjancent nodes
+	
 
 	// TODO 6: Iterate adjancent nodes:
 	// ignore nodes in the closed list
