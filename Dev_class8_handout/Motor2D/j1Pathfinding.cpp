@@ -174,8 +174,8 @@ int PathNode::Score() const
 int PathNode::CalculateF(const iPoint& destination)
 {
 	g = parent->g + 1;
-	h = pos.DistanceTo(destination);
-
+	//h = pos.DistanceTo(destination);
+	h = pos.DistanceNoSqrt(destination);
 	return g + h;
 }
 
@@ -248,6 +248,7 @@ int j1PathFinding::CreatePath(const iPoint& origin, const iPoint& destination)
 				{
 					//item->data.parent = &aux_pathNode->data;
 					item->data.CalculateF(destination);
+
 					//Check if it's a diagonal movement
 					if (abs(item->data.pos.x - item->data.parent->pos.x) == abs(item->data.pos.y - item->data.parent->pos.y))
 					{
