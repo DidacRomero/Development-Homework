@@ -17,7 +17,7 @@
 // TODO 3: Measure the amount of ms that takes to execute:
 // App constructor, Awake, Start and CleanUp
 // LOG the result
-
+j1Timer timer;
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -29,6 +29,7 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new j1Scene();
 	map = new j1Map();
 	pathfinding = new j1PathFinding();
+	
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -68,6 +69,8 @@ void j1App::AddModule(j1Module* module)
 // Called before render is available
 bool j1App::Awake()
 {
+	timer.Start();
+
 	pugi::xml_document	config_file;
 	pugi::xml_node		config;
 	pugi::xml_node		app_config;
@@ -97,6 +100,8 @@ bool j1App::Awake()
 		}
 	}
 
+	float a = timer.Read();
+	LOG( "Awake takes: %f to complete",timer.Read());
 	return ret;
 }
 
