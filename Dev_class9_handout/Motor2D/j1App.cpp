@@ -114,6 +114,7 @@ bool j1App::Start()
 	perfTimer.Start();
 	timer.Start();
 	one_second_timer.Start();
+	FPS_limiter.Start();
 	perfTimer.Start();
 	bool ret = true;
 	p2List_item<j1Module*>* item;
@@ -171,46 +172,54 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
-	perfTimer.Start();
+	if (FPS_limiter.ReadMs() >= (1000000 / 30))
+	{
+		perfTimer.Start();
+		FPS_limiter.Start();
+	}
 }
 
 // ---------------------------------------------
 void j1App::FinishUpdate()
 {
-	if(want_to_save == true)
-		SavegameNow();
-
-	if(want_to_load == true)
-		LoadGameNow();
-
-	// TODO 4: Now calculate:
-	// Amount of frames since startup
-	// Amount of time since game start (use a low resolution timer)
-	// Average FPS for the whole game life
-	// Amount of ms took the last update
-	// Amount of frames during the last second
-
-	
-	float seconds_since_startup = timer.ReadSec(); //OK
-	float dt = 0.0f;
-	uint32 last_frame_ms = perfTimer.ReadMs() / 1000;  //OK
-	//uint32 frames_on_last_update = 0;
-	uint64 frame_count = total_frames_passed;  //OK
-
-	float avg_fps = total_frames_passed / seconds_since_startup;
-
-	if (one_second_timer.ReadSec() >= 1.0f)
+	if (FPS_limiter.ReadMs() >= (1000000 / 30))
 	{
-		frames_on_last_update = total_frames_passed - frames_started; //OK
-		one_second_timer.Start();
-		frames_started = total_frames_passed; 
+		if (want_to_save == true)
+			SavegameNow();
+
+		if (want_to_load == true)
+			LoadGameNow();
+
+		// TODO 4: Now calculate:
+		// Amount of frames since startup
+		// Amount of time since game start (use a low resolution timer)
+		// Average FPS for the whole game life
+		// Amount of ms took the last update
+		// Amount of frames during the last second
+
+		total_frames_passed++;
+
+		float seconds_since_startup = timer.ReadSec(); //OK
+		float dt = 0.0f;
+		uint32 last_frame_ms = perfTimer.ReadMs() / 1000;  //OK
+		//uint32 frames_on_last_update = 0;
+		uint64 frame_count = total_frames_passed;  //OK
+
+		float avg_fps = total_frames_passed / seconds_since_startup; //OK
+
+		if (one_second_timer.ReadSec() >= 1.0f)
+		{
+			frames_on_last_update = total_frames_passed - frames_started; //OK
+			one_second_timer.Start();
+			frames_started = total_frames_passed;
+		}
+
+		static char title[256];
+		sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
+			avg_fps, last_frame_ms, frames_on_last_update, dt, seconds_since_startup, frame_count);
+
+		App->win->SetTitle(title);
 	}
-
-	static char title[256];
-	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
-			  avg_fps, last_frame_ms, frames_on_last_update, dt, seconds_since_startup, frame_count);
-
-	App->win->SetTitle(title);
 }
 
 // Call modules before each loop iteration
@@ -274,7 +283,6 @@ bool j1App::PostUpdate()
 
 		ret = item->data->PostUpdate();
 	}
-	total_frames_passed++;
 	return ret;
 }
 

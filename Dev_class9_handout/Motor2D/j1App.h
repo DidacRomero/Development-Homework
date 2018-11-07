@@ -89,7 +89,11 @@ public:
 	j1Map*				map = NULL;
 	j1PathFinding*		pathfinding = NULL;
 	 
-
+	//Framerate Related
+	j1Timer timer;
+	j1Timer one_second_timer;
+	j1PerfTimer perfTimer;
+	j1PerfTimer FPS_limiter;
 private:
 
 	p2List<j1Module*>	modules;
@@ -105,10 +109,7 @@ private:
 	mutable p2SString	save_game;
 
 
-	//Framerate Related
-	j1Timer timer;
-	j1Timer one_second_timer;
-	j1PerfTimer perfTimer;
+	
 
 	uint32 frames_on_last_update = 0;
 	uint64 total_frames_passed = 0;
