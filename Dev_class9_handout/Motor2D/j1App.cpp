@@ -18,9 +18,11 @@
 // App constructor, Awake, Start and CleanUp
 // LOG the result
 j1Timer timer;
+j1PerfTimer perfTimer;
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
+	timer.Start();
 	input = new j1Input();
 	win = new j1Window();
 	render = new j1Render();
@@ -43,6 +45,8 @@ j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 
 	// render last to swap buffer
 	AddModule(render);
+	
+	LOG("Constructor takes %d ms", timer.Read());
 }
 
 // Destructor
@@ -100,14 +104,17 @@ bool j1App::Awake()
 		}
 	}
 
-	float a = timer.Read();
-	LOG( "Awake takes: %f to complete",timer.Read());
+	float time_taken = timer.Read();
+	LOG( "Awake takes: %f to complete", time_taken);
 	return ret;
 }
 
 // Called before the first frame
 bool j1App::Start()
 {
+	perfTimer.Start();
+	timer.Start();
+	perfTimer.Start();
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.start;
@@ -117,6 +124,10 @@ bool j1App::Start()
 		ret = item->data->Start();
 		item = item->next;
 	}
+	float time_taken = timer.Read();
+	float perf_time_taken = perfTimer.ReadMs();
+	LOG("Start took: %f ms to complete",time_taken);
+	LOG("Start took: %f micro seconds to complete", perf_time_taken);
 	return ret;
 }
 
@@ -160,6 +171,7 @@ pugi::xml_node j1App::LoadConfig(pugi::xml_document& config_file) const
 // ---------------------------------------------
 void j1App::PrepareUpdate()
 {
+	perfTimer.Start();
 }
 
 // ---------------------------------------------
@@ -179,11 +191,11 @@ void j1App::FinishUpdate()
 	// Amount of frames during the last second
 
 	float avg_fps = 0.0f;
-	float seconds_since_startup = 0.0f;
+	float seconds_since_startup = timer.ReadSec(); //OK
 	float dt = 0.0f;
-	uint32 last_frame_ms = 0;
+	uint32 last_frame_ms = perfTimer.ReadMs();
 	uint32 frames_on_last_update = 0;
-	uint64 frame_count = 0;
+	uint64 frame_count = total_frames_passed;  //OK
 
 	static char title[256];
 	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
@@ -253,24 +265,29 @@ bool j1App::PostUpdate()
 
 		ret = item->data->PostUpdate();
 	}
-
+	total_frames_passed++;
 	return ret;
 }
 
 // Called before quitting
 bool j1App::CleanUp()
 {
+	timer.Start();
 	bool ret = true;
 	p2List_item<j1Module*>* item;
 	item = modules.end;
 
-	while(item != NULL && ret == true)
+	while (item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
 		item = item->prev;
 	}
+	float time_taken = timer.Read();
+	LOG("CleanUp took: %f ms to complete", time_taken);
+
 	return ret;
 }
+	
 
 // ---------------------------------------
 int j1App::GetArgc() const

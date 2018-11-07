@@ -104,6 +104,9 @@ private:
 	p2SString			load_game;
 	mutable p2SString	save_game;
 
+
+	//Framerate Related
+	uint64 total_frames_passed = 0;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S
