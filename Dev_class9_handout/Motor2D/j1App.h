@@ -106,7 +106,13 @@ private:
 
 
 	//Framerate Related
+	j1Timer timer;
+	j1Timer one_second_timer;
+	j1PerfTimer perfTimer;
+
+	uint32 frames_on_last_update = 0;
 	uint64 total_frames_passed = 0;
+	uint64 frames_started;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S

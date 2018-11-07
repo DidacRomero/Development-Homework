@@ -17,8 +17,7 @@
 // TODO 3: Measure the amount of ms that takes to execute:
 // App constructor, Awake, Start and CleanUp
 // LOG the result
-j1Timer timer;
-j1PerfTimer perfTimer;
+
 // Constructor
 j1App::j1App(int argc, char* args[]) : argc(argc), args(args)
 {
@@ -114,6 +113,7 @@ bool j1App::Start()
 {
 	perfTimer.Start();
 	timer.Start();
+	one_second_timer.Start();
 	perfTimer.Start();
 	bool ret = true;
 	p2List_item<j1Module*>* item;
@@ -190,12 +190,21 @@ void j1App::FinishUpdate()
 	// Amount of ms took the last update
 	// Amount of frames during the last second
 
-	float avg_fps = 0.0f;
+	
 	float seconds_since_startup = timer.ReadSec(); //OK
 	float dt = 0.0f;
-	uint32 last_frame_ms = perfTimer.ReadMs();
-	uint32 frames_on_last_update = 0;
+	uint32 last_frame_ms = perfTimer.ReadMs() / 1000;  //OK
+	//uint32 frames_on_last_update = 0;
 	uint64 frame_count = total_frames_passed;  //OK
+
+	float avg_fps = total_frames_passed / seconds_since_startup;
+
+	if (one_second_timer.ReadSec() >= 1.0f)
+	{
+		frames_on_last_update = total_frames_passed - frames_started; //OK
+		one_second_timer.Start();
+		frames_started = total_frames_passed; 
+	}
 
 	static char title[256];
 	sprintf_s(title, 256, "Av.FPS: %.2f Last Frame Ms: %02u Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %lu ",
