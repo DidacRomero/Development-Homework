@@ -203,9 +203,10 @@ void j1App::FinishUpdate()
 	App->win->SetTitle(title);
 
 	// TODO 2: Use SDL_Delay to make sure you get your capped framerate
-
-
+	delay_sdl_tDelay.Start();
+	SDL_Delay(1000/frame_cap);
 	// TODO3: Measure accurately the amount of time it SDL_Delay actually waits compared to what was expected
+	LOG("We waited for %d milliseconds and got back in %f ", 1000 / frame_cap, delay_sdl_tDelay.ReadMs());
 }
 
 // Call modules before each loop iteration

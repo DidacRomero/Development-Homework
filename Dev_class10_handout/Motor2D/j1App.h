@@ -111,6 +111,7 @@ private:
 	uint32				prev_last_sec_frame_count = 0;
 
 	uint				frame_cap;
+	j1PerfTimer			delay_sdl_tDelay;
 };
 
 extern j1App* App; // No student is asking me about that ... odd :-S
