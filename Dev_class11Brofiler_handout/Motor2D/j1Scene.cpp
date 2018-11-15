@@ -10,6 +10,7 @@
 #include "j1PathFinding.h"
 #include "j1Scene.h"
 
+#include "Brofiler/Brofiler.h"
 j1Scene::j1Scene() : j1Module()
 {
 	name.create("scene");
@@ -49,7 +50,7 @@ bool j1Scene::Start()
 // Called each loop iteration
 bool j1Scene::PreUpdate()
 {
-
+	BROFILER_CATEGORY("Scene_Pre_Update", Profiler::Color::DarkTurquoise);
 	// debug pathfing ------------------
 	static iPoint origin;
 	static bool origin_selected = false;
@@ -79,6 +80,7 @@ bool j1Scene::PreUpdate()
 // Called each loop iteration
 bool j1Scene::Update(float dt)
 {
+	BROFILER_CATEGORY("Scene_Update", Profiler::Color::LawnGreen);
 	if(App->input->GetKey(SDL_SCANCODE_L) == KEY_DOWN)
 		App->LoadGame("save_game.xml");
 

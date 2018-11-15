@@ -11,6 +11,8 @@
 #pragma comment( lib, "SDL/libx86/SDL2main.lib" )
 
 // TODO 1: Include the header and load the library for Brofiler
+#include "Brofiler/Brofiler.h"
+#pragma comment(lib, "Brofiler/ProfilerCore32.lib")
 
 
 enum MainState
@@ -84,7 +86,7 @@ int main(int argc, char* args[])
 			case LOOP:
 			{
 				// TODO 2: Add the Brofiler Macro to trigger a frame
-
+				BROFILER_FRAME("frameName");
 				if (App->Update() == false)
 					state = CLEAN;
 			}
