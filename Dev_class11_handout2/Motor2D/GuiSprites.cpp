@@ -17,31 +17,33 @@ GuiSprites::~GuiSprites()
 
 bool GuiSprites::Awake() {
 
-
+	return true;
 }
 //Start
 bool GuiSprites::Start() {
 
+
+	return true;
 }
 //PreUpdate		
 bool GuiSprites::PreUpdate() {
 
-
+	return true;
 }
 //Update		
 bool GuiSprites::Update() {
 
-
+	return true;
 }
 //PostUpdate	
 bool GuiSprites::PostUpdate() {
 
-
+	return true;
 }
 //CleanUp
 bool GuiSprites::CleanUp() {
 
-
+	return true;
 }
 
 
