@@ -51,6 +51,6 @@ bool GuiSprites::CleanUp() {
 void GuiSprites::DisplaySprite() {
 
 
-	App->render->Blit(tex, position.x, position.y,&rect);
+	App->render->Blit(tex, position.x, position.y,&rect,isStatic);
 
 }

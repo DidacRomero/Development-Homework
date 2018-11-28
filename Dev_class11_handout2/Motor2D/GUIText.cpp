@@ -62,5 +62,5 @@ bool GUIText::CleanUp() {
 
 void GUIText::DisplayText() {
 	
-	App->render->Blit(tex,position.x,position.y,&rect);
+	App->render->Blit(tex,position.x,position.y,&rect,isStatic);
 }

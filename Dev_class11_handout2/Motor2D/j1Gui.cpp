@@ -38,12 +38,13 @@ bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
-	iPoint testPoint = { 30,30 };
+	iPoint testPoint = { 300,40 };
 	SDL_Rect testRect = { 485, 829, 328, 103 };
 	CreateElement(ElementType::SPRITE,testPoint,testRect,atlas);
 
+	iPoint textTestPoint = { 300,5 };
 	SDL_Rect textTestRect= { 0,0, 300, 20 };
-	CreateElement(ElementType::TEXT, testPoint, textTestRect,nullptr);
+	CreateElement(ElementType::TEXT, textTestPoint, textTestRect,nullptr);
 
 	bool ret = true;
 	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
