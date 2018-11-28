@@ -10,7 +10,7 @@ class GUIText :public ElementGUI
 
 
 public:
-	GUIText();
+	GUIText(ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex);
 	
 	~GUIText();
 

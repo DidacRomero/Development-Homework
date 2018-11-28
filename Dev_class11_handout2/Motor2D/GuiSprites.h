@@ -10,7 +10,7 @@ class GuiSprites :public ElementGUI
 {
 public:
 
-	GuiSprites(ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex);
+	GuiSprites(ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex );
 
 	~GuiSprites();
 

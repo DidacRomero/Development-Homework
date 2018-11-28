@@ -3,7 +3,7 @@
 #include "j1Render.h"
 
 
-GuiSprites::GuiSprites(ElementType type, iPoint position, SDL_Rect &rect, SDL_Texture* tex) : ElementGUI(type,position, rect,tex){
+GuiSprites::GuiSprites(ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex) : ElementGUI(type,position, rect, isStatic,tex ){
 
 
 }
@@ -32,12 +32,12 @@ bool GuiSprites::PreUpdate() {
 }
 //Update		
 bool GuiSprites::Update() {
-
+	
 	return true;
 }
 //PostUpdate	
 bool GuiSprites::PostUpdate() {
-
+	DisplaySprite();
 	return true;
 }
 //CleanUp

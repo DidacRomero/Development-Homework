@@ -29,6 +29,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
+
 	return ret;
 }
 
@@ -38,10 +39,21 @@ bool j1Gui::Start()
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
 	iPoint testPoint = { 30,30 };
-	SDL_Rect testRect = { 0,0, 270,777 };
+	SDL_Rect testRect = { 485, 829, 328, 103 };
 	CreateElement(ElementType::SPRITE,testPoint,testRect,atlas);
 
-	return true;
+	SDL_Rect textTestRect= { 0,0, 300, 20 };
+	CreateElement(ElementType::TEXT, testPoint, textTestRect,nullptr);
+
+	bool ret = true;
+	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
+	{
+		ret = item->data->Awake();
+		if (!ret)
+			break;
+	}
+
+	return ret;
 }
 
 // Update all guis
@@ -53,7 +65,17 @@ bool j1Gui::PreUpdate()
 // Called after all Updates
 bool j1Gui::PostUpdate()
 {
-	return true;
+	bool ret = true;
+
+	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
+	{
+		ret = item->data->PostUpdate();
+		if (!ret)
+			break;
+	}
+
+
+	return ret;
 }
 
 // Called before quitting
@@ -92,13 +114,13 @@ void j1Gui::CreateElement(ElementType element, iPoint position, SDL_Rect &rect, 
 		
 	case ElementType::SPRITE:
 
-		ElemGUI = new GuiSprites(element,position,rect,tex);
+		ElemGUI = new GuiSprites(element,position,rect,true, tex);
 
 			break;
 
 	case ElementType::TEXT:
 
-		ElemGUI = new GUIText();
+		ElemGUI = new GUIText(element, position, rect,true, tex );
 		
 		break;
 
