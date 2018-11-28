@@ -6,6 +6,10 @@
 #include "j1Fonts.h"
 #include "j1Input.h"
 #include "j1Gui.h"
+#include "ElementGUI.h"
+#include "GuiSprites.h"
+#include "GUIText.h"
+
 
 
 j1Gui::j1Gui() : j1Module()
@@ -53,8 +57,20 @@ bool j1Gui::CleanUp()
 {
 	LOG("Freeing GUI");
 
-	return true;
+	bool ret = true;
+	
+	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
+	{
+		ret = item->data->CleanUp();
+		if (!ret)
+			break;
+	}
+	
+	
+	return ret;
+
 }
+
 
 // const getter for atlas
 const SDL_Texture* j1Gui::GetAtlas() const
@@ -65,30 +81,31 @@ const SDL_Texture* j1Gui::GetAtlas() const
 void j1Gui::CreateElement(ElementType element, ButtonType button)
 {
 
+	ElementGUI*ElemGUI = nullptr;
 
 	switch (element)
 	{
-
+		
 	case ElementType::SPRITE:
 
-
+		ElemGUI = new GuiSprites();
 
 			break;
 
 	case ElementType::TEXT:
 
-		
+		ElemGUI = new GUIText();
 		
 		break;
 
 
 
-	default:
-		break;
 	}
 
-
-
+	if (ElemGUI != nullptr)
+		ElementList.add(ElemGUI);
+	else
+		LOG("ElemGUI is nullptr");
 
 }
 // class Gui ---------------------------------------------------

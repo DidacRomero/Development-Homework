@@ -14,6 +14,38 @@ GuiSprites::~GuiSprites()
 }
 
 
+
+bool GuiSprites::Awake() {
+
+
+}
+//Start
+bool GuiSprites::Start() {
+
+}
+//PreUpdate		
+bool GuiSprites::PreUpdate() {
+
+
+}
+//Update		
+bool GuiSprites::Update() {
+
+
+}
+//PostUpdate	
+bool GuiSprites::PostUpdate() {
+
+
+}
+//CleanUp
+bool GuiSprites::CleanUp() {
+
+
+}
+
+
+
 void GuiSprites::DisplaySprite() {
 
 

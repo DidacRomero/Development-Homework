@@ -18,6 +18,37 @@ GUIText::~GUIText()
 }
 
 
+
+
+bool GUIText::Awake() {
+
+
+}
+//Start
+bool GUIText::Start() {
+
+}
+//PreUpdate		
+bool GUIText::PreUpdate() {
+
+
+}
+//Update		
+bool GUIText::Update() {
+
+
+}
+//PostUpdate	
+bool GUIText::PostUpdate() {
+
+
+}
+//CleanUp
+bool GUIText::CleanUp() {
+
+
+}
+
 void GUIText::DisplayText() {
 
 	App->font->Print(Text,ColorText,Textfont);

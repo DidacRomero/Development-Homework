@@ -14,6 +14,20 @@ public:
 	
 	~GUIText();
 
+
+	bool Awake();
+	//Start
+	bool Start();
+	//PreUpdate		
+	bool PreUpdate();
+	//Update		
+	bool Update();
+	//PostUpdate	
+	bool PostUpdate();
+	//CleanUp
+	bool CleanUp();
+
+
 public:
 	void DisplayText();
 	

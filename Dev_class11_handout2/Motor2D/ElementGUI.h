@@ -18,9 +18,18 @@ public:
 
 	virtual ~ElementGUI();
 
-
-
 	
+	virtual bool Awake() { return true; }
+	//Start
+	virtual bool Start() { return true; }
+	//PreUpdate		
+	virtual bool PreUpdate() { return true; }
+	//Update		
+	virtual bool Update() { return true; }
+	//PostUpdate	
+	virtual bool PostUpdate() { return true; }
+	//CleanUp
+	virtual bool CleanUp() { return true; }
 
 	
 
@@ -32,7 +41,7 @@ protected:
 
 	ElementType type;
 
-	p2List<ElementGUI> ElementList;
+	
 
 };
 

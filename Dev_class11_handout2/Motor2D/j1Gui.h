@@ -3,6 +3,8 @@
 
 #include "j1Module.h"
 #include "p2SString.h"
+#include "p2List.h"
+
 
 #define CURSOR_WIDTH 2
 
@@ -10,7 +12,9 @@
 
 // ---------------------------------------------------
 
+class ElementGUI;
 struct SDL_Texture;
+
 
 enum class ElementType
 {
@@ -67,7 +71,7 @@ private:
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 
-	
+	p2List<ElementGUI*> ElementList;
 };
 
 #endif // __j1GUI_H__
