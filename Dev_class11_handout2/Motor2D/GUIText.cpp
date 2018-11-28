@@ -51,8 +51,5 @@ bool GUIText::CleanUp() {
 }
 
 void GUIText::DisplayText() {
-
 	App->font->Print(Text,ColorText,Textfont);
-	
-
 }

@@ -37,6 +37,10 @@ bool j1Gui::Start()
 {
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
+	iPoint testPoint = { 30,30 };
+	SDL_Rect testRect = { 0,0, 270,777 };
+	CreateElement(ElementType::SPRITE,testPoint,testRect,atlas);
+
 	return true;
 }
 
@@ -78,7 +82,7 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-void j1Gui::CreateElement(ElementType element, ButtonType button)
+void j1Gui::CreateElement(ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button)
 {
 
 	ElementGUI*ElemGUI = nullptr;
@@ -88,7 +92,7 @@ void j1Gui::CreateElement(ElementType element, ButtonType button)
 		
 	case ElementType::SPRITE:
 
-		ElemGUI = new GuiSprites();
+		ElemGUI = new GuiSprites(element,position,rect,tex);
 
 			break;
 

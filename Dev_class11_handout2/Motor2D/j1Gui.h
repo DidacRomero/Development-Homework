@@ -4,6 +4,7 @@
 #include "j1Module.h"
 #include "p2SString.h"
 #include "p2List.h"
+#include "p2Point.h"
 
 
 #define CURSOR_WIDTH 2
@@ -14,6 +15,7 @@
 
 class ElementGUI;
 struct SDL_Texture;
+struct SDL_Rect;
 
 
 enum class ElementType
@@ -63,7 +65,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	void CreateElement(ElementType element, ButtonType button = ButtonType::NOT_BUTTON);
+	void CreateElement(ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button = ButtonType::NOT_BUTTON);
 
 
 private:
