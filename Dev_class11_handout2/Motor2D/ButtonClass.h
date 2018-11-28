@@ -8,10 +8,12 @@ public:
 	ButtonClass();
 
 
-
-
-
 	~ButtonClass();
+
+
+
+
+
 };
 
 

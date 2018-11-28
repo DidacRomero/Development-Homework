@@ -4,22 +4,27 @@
 #include "j1Gui.h"
 #include "p2Point.h"
 #include "p2List.h"
-#include "SDL/include/SDL.h"  //CHANGE FIX
-
+#include "SDL/include/SDL.h"  
 
 
 
 class ElementGUI
 {
 public:
-	ElementGUI();
+
+	ElementGUI(ElementType Element,iPoint position, SDL_Rect rect, SDL_Texture*tex = nullptr);
+
 
 
 	virtual ~ElementGUI();
 
 
 
-private:
+	
+
+	
+
+protected:
 	
 	iPoint position;
 	SDL_Rect rect;
@@ -27,7 +32,6 @@ private:
 
 	ElementType type;
 
-	//void CreateElement(ElementType element, ButtonType button = ButtonType::NOT_BUTTON);
 	p2List<ElementGUI> ElementList;
 
 };

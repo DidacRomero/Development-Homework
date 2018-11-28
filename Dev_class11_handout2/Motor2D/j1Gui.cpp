@@ -62,6 +62,34 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
+void j1Gui::CreateElement(ElementType element, ButtonType button)
+{
 
+
+	switch (element)
+	{
+
+	case ElementType::SPRITE:
+
+
+
+			break;
+
+	case ElementType::TEXT:
+
+		
+		
+		break;
+
+
+
+	default:
+		break;
+	}
+
+
+
+
+}
 // class Gui ---------------------------------------------------
 

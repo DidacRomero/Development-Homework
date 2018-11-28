@@ -59,6 +59,9 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
+	void CreateElement(ElementType element, ButtonType button = ButtonType::NOT_BUTTON);
+
+
 private:
 
 	SDL_Texture* atlas;
