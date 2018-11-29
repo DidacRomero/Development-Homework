@@ -135,10 +135,10 @@
     <ClInclude Include="ElementGUI.h">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClInclude>
-    <ClInclude Include="GuiSprites.h">
+    <ClInclude Include="GUIText.h">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClInclude>
-    <ClInclude Include="GUIText.h">
+    <ClInclude Include="GuiSprites.h">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClInclude>
   </ItemGroup>

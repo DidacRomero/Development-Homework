@@ -54,6 +54,8 @@ public:
 	// Called before all Updates
 	bool PreUpdate();
 
+	bool Update();
+
 	// Called after all Updates
 	bool PostUpdate();
 
@@ -65,15 +67,17 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	void CreateElement(ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button = ButtonType::NOT_BUTTON);
+	void CreateElement(int id, ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button = ButtonType::NOT_BUTTON);
 
+
+	p2List<ElementGUI*> ElementList;
 
 private:
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
 
-	p2List<ElementGUI*> ElementList;
+	
 };
 
 #endif // __j1GUI_H__

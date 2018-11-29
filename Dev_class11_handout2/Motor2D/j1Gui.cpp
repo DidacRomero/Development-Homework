@@ -9,6 +9,7 @@
 #include "ElementGUI.h"
 #include "GuiSprites.h"
 #include "GUIText.h"
+#include "ButtonClass.h"
 
 
 
@@ -40,11 +41,18 @@ bool j1Gui::Start()
 
 	iPoint testPoint = { 300,40 };
 	SDL_Rect testRect = { 485, 829, 328, 103 };
-	CreateElement(ElementType::SPRITE,testPoint,testRect,atlas);
+	CreateElement(0,ElementType::SPRITE,testPoint,testRect,atlas);
 
 	iPoint textTestPoint = { 300,5 };
 	SDL_Rect textTestRect= { 0,0, 300, 20 };
-	CreateElement(ElementType::TEXT, textTestPoint, textTestRect,nullptr);
+	CreateElement(0,ElementType::TEXT, textTestPoint, textTestRect,nullptr);
+
+
+
+	iPoint ButtonTestPoint = { 350,200 };
+	SDL_Rect unHoveredRect = {2,112,226,64};
+	CreateElement(3, ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas);
+
 
 	bool ret = true;
 	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
@@ -61,6 +69,21 @@ bool j1Gui::Start()
 bool j1Gui::PreUpdate()
 {
 	return true;
+}
+
+bool j1Gui::Update() {
+
+	bool ret = true;
+
+	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
+	{
+		ret = item->data->Update();
+		if (!ret)
+			break;
+	}
+
+
+	return ret;
 }
 
 // Called after all Updates
@@ -105,7 +128,7 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-void j1Gui::CreateElement(ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button)
+void j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button)
 {
 
 	ElementGUI*ElemGUI = nullptr;
@@ -125,8 +148,11 @@ void j1Gui::CreateElement(ElementType element, iPoint position, SDL_Rect &rect, 
 		
 		break;
 
+	case ElementType::BUTTON:
 
-
+		ElemGUI = new ButtonClass(id,element, position, rect, true, tex);
+		
+		break;
 	}
 
 	if (ElemGUI != nullptr)

@@ -43,7 +43,8 @@ protected:
 
 	bool isStatic;
 
-	
+	bool hovering;
+	bool clicked;
 
 };
 
