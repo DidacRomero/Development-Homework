@@ -10,6 +10,7 @@
 #include "PugiXml\src\pugixml.hpp"
 
 class j1App;
+class ElementGUI;
 
 class j1Module
 {
@@ -71,6 +72,8 @@ public:
 	{
 		return true;
 	}
+
+	virtual void callbackUiElement(ElementGUI &element) {}
 
 public:
 

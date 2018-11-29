@@ -9,6 +9,7 @@
 #include "j1Map.h"
 #include "j1PathFinding.h"
 #include "j1Gui.h"
+#include "ElementGUI.h"
 #include "j1Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -153,4 +154,9 @@ bool j1Scene::CleanUp()
 	LOG("Freeing scene");
 
 	return true;
+}
+
+void j1Scene::callbackUiElement(int id)
+{
+	ElementGUI* element = App->gui->ElementList.At(id)->data;
 }

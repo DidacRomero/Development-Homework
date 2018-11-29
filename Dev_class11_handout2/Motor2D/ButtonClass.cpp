@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Input.h"
+#include "j1Scene.h"
 
 ButtonClass::ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex) : ElementGUI(type, position, rect, isStatic, tex),id(id) {
 
@@ -36,38 +37,6 @@ bool ButtonClass::PreUpdate() {
 //Update		
 bool ButtonClass::Update() {
 
-	App->input->GetMousePosition(MousePos.x, MousePos.y);
-	
-	
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
-		//!(MousePos.x < rect.x || MousePos.x >rect.x+rect.w || MousePos.y < rect.y || MousePos.y >rect.y + rect.h))
-	{
-
-		hovering = true;
-
-
-	}
-	else
-	{
-		hovering = false;
-		clicked = false;
-	}
-
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN && hovering) {
-
-		clicked = true;
-
-	
-
-	}
-	if (hovering && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-
-		clicked = false;
-
-	}
-
-
-
 	return true;
 }
 //PostUpdate	
@@ -75,10 +44,11 @@ bool ButtonClass::PostUpdate() {
 	
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 
-
+	
 	if (!(MousePos.x < position.x || MousePos.x > position.x+rect.w || MousePos.y < position.y || MousePos.y >position.y + rect.h))
 	{
 		hovering = true;
+		App->scene->callbackUiElement(id);
 	}
 	else
 	{

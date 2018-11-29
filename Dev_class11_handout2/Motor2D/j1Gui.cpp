@@ -37,21 +37,22 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
+	elementIds = 0;
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
 	iPoint testPoint = { 300,40 };
 	SDL_Rect testRect = { 485, 829, 328, 103 };
-	CreateElement(0,ElementType::SPRITE,testPoint,testRect,atlas);
+	CreateElement(elementIds,ElementType::SPRITE,testPoint,testRect,atlas);
 
 	iPoint textTestPoint = { 300,5 };
 	SDL_Rect textTestRect= { 0,0, 300, 20 };
-	CreateElement(0,ElementType::TEXT, textTestPoint, textTestRect,nullptr);
+	CreateElement(elementIds,ElementType::TEXT, textTestPoint, textTestRect,nullptr);
 
 
 
 	iPoint ButtonTestPoint = { 350,200 };
 	SDL_Rect unHoveredRect = {2,112,226,64};
-	CreateElement(3, ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas);
+	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas);
 
 
 	bool ret = true;
@@ -139,19 +140,19 @@ void j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect 
 	case ElementType::SPRITE:
 
 		ElemGUI = new GuiSprites(element,position,rect,true, tex);
-
+		elementIds++;
 			break;
 
 	case ElementType::TEXT:
 
 		ElemGUI = new GUIText(element, position, rect,true, tex );
-		
+		elementIds++;
 		break;
 
 	case ElementType::BUTTON:
 
 		ElemGUI = new ButtonClass(id,element, position, rect, true, tex);
-		
+		elementIds++;
 		break;
 	}
 

@@ -34,6 +34,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	//UI Callback with the element that the user interacts with
+	void callbackUiElement(int id);
+
 private:
 	SDL_Texture* debug_tex;
 	GuiImage* banner;
