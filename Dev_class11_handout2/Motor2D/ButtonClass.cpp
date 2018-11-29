@@ -39,7 +39,8 @@ bool ButtonClass::Update() {
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 	
 	
-	if (!(MousePos.x < rect.x || MousePos.x >rect.x+rect.w || MousePos.y < rect.y || MousePos.y >rect.y + rect.h))
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+		//!(MousePos.x < rect.x || MousePos.x >rect.x+rect.w || MousePos.y < rect.y || MousePos.y >rect.y + rect.h))
 	{
 
 		hovering = true;
@@ -72,6 +73,28 @@ bool ButtonClass::Update() {
 //PostUpdate	
 bool ButtonClass::PostUpdate() {
 	
+	App->input->GetMousePosition(MousePos.x, MousePos.y);
+
+
+	if (!(MousePos.x < position.x || MousePos.x > position.x+rect.w || MousePos.y < position.y || MousePos.y >position.y + rect.h))
+	{
+		hovering = true;
+	}
+	else
+	{
+		hovering = false;
+		clicked = false;
+	}
+
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN && hovering) 
+	{
+		clicked = true;
+	}
+	if (hovering && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) 
+	{
+		clicked = false;
+	}
+
 	DisplayButton();
 
 	return true;
@@ -81,13 +104,12 @@ bool ButtonClass::CleanUp() {
 
 	return true;
 }
-void ButtonClass::DisplayButton() {
-
-	if(hovering)
-	App->render->Blit(tex, position.x, position.y, &hoveringRect, isStatic);
-	else if(clicked)
+void ButtonClass::DisplayButton() 
+{
+	 if(clicked)
 		App->render->Blit(tex, position.x, position.y, &clickedRect, isStatic);
+	else if (hovering)
+		App->render->Blit(tex, position.x, position.y, &hoveringRect, isStatic);
 	else
 		App->render->Blit(tex, position.x, position.y, &rect, isStatic);
-
 }
