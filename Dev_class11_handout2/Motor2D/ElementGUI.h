@@ -12,7 +12,7 @@ class ElementGUI
 {
 public:
 
-	ElementGUI(ElementType Element,iPoint position, SDL_Rect rect, bool isStatic, SDL_Texture*tex = nullptr);
+	ElementGUI(int id, ElementType Element, iPoint position, SDL_Rect rect, bool isStatic, SDL_Texture*tex = nullptr);
 
 
 
@@ -33,7 +33,7 @@ public:
 
 	
 
-protected:
+public:
 	
 	iPoint position;
 	SDL_Rect rect;
@@ -45,6 +45,8 @@ protected:
 
 	bool hovering;
 	bool clicked;
+
+	int id;
 
 };
 

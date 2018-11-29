@@ -139,13 +139,13 @@ void j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect 
 		
 	case ElementType::SPRITE:
 
-		ElemGUI = new GuiSprites(element,position,rect,true, tex);
+		ElemGUI = new GuiSprites(id,element,position,rect,true, tex);
 		elementIds++;
 			break;
 
 	case ElementType::TEXT:
 
-		ElemGUI = new GUIText(element, position, rect,true, tex );
+		ElemGUI = new GUIText(id,element, position, rect,true, tex );
 		elementIds++;
 		break;
 

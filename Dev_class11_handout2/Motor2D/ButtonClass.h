@@ -37,9 +37,6 @@ public:
 
 	iPoint MousePos;
 
-	int id;
-
-
 	SDL_Rect hoveringRect;
 	SDL_Rect clickedRect;
 };

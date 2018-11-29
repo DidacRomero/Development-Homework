@@ -6,7 +6,7 @@
 
 
 
-GUIText::GUIText(ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex) : ElementGUI(type, position, rect,isStatic,tex)
+GUIText::GUIText(int id, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex) : ElementGUI(id,type, position, rect, isStatic, tex)
 {
 
 	tex = nullptr;

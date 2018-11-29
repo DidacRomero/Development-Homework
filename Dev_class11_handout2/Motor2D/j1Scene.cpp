@@ -159,4 +159,12 @@ bool j1Scene::CleanUp()
 void j1Scene::callbackUiElement(int id)
 {
 	ElementGUI* element = App->gui->ElementList.At(id)->data;
+	
+	if (element->type == ElementType::BUTTON)
+	{
+		if (element->hovering)
+		{
+			element->position.x += 20;
+		}
+	}
 }
