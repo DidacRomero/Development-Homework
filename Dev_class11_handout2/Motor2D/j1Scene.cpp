@@ -156,10 +156,8 @@ bool j1Scene::CleanUp()
 	return true;
 }
 
-void j1Scene::callbackUiElement(int id)
+void j1Scene::callbackUiElement(ElementGUI *element)
 {
-	ElementGUI* element = App->gui->ElementList.At(id)->data;
-	
 	if (element->type == ElementType::BUTTON)
 	{
 		if (element->hovering)

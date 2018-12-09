@@ -73,7 +73,7 @@ public:
 		return true;
 	}
 
-	virtual void callbackUiElement(ElementGUI &element) {}
+	virtual void callbackUiElement(ElementGUI *element) {}
 
 public:
 

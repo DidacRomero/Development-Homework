@@ -435,3 +435,18 @@ bool j1App::SavegameNow() const
 	want_to_save = false;
 	return ret;
 }
+
+
+
+//This is the UI function taht Ric may not want to be implemented in this form
+void j1App::UiElementCallback(ElementGUI *element)
+{
+	p2List_item<j1Module*>* item_module;
+	item_module = modules.start;
+
+	while (item_module != NULL)
+	{
+		item_module->data->callbackUiElement(element);
+		item_module = item_module->next;
+	}
+}

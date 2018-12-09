@@ -35,7 +35,7 @@ public:
 	bool CleanUp();
 
 	//UI Callback with the element that the user interacts with
-	void callbackUiElement(int id);
+	void callbackUiElement(ElementGUI *element);
 
 private:
 	SDL_Texture* debug_tex;

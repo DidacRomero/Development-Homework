@@ -55,6 +55,9 @@ public:
 	void SaveGame(const char* file) const;
 	void GetSaveGames(p2List<p2SString>& list_to_fill) const;
 
+	//Function added for UI maybe not the way Ric wants this to be
+	void UiElementCallback(ElementGUI *element);
+
 private:
 
 	// Load config file

@@ -68,7 +68,7 @@ public:
 	const SDL_Texture* GetAtlas() const;
 
 	void CreateElement(int id, ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button = ButtonType::NOT_BUTTON);
-
+	
 
 	p2List<ElementGUI*> ElementList;
 

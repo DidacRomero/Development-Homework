@@ -54,6 +54,9 @@ bool j1Gui::Start()
 	SDL_Rect unHoveredRect = {2,112,226,64};
 	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas);
 
+	iPoint ButtonTestPoint_2 = { 350, 500 };
+	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint_2, unHoveredRect, atlas);
+
 
 	bool ret = true;
 	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
@@ -162,5 +165,6 @@ void j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect 
 		LOG("ElemGUI is nullptr");
 
 }
-// class Gui ---------------------------------------------------
+
+
 

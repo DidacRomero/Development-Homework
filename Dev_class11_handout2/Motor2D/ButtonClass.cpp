@@ -48,7 +48,6 @@ bool ButtonClass::PostUpdate() {
 	if (!(MousePos.x < position.x || MousePos.x > position.x+rect.w || MousePos.y < position.y || MousePos.y >position.y + rect.h))
 	{
 		hovering = true;
-		App->scene->callbackUiElement(id);
 	}
 	else
 	{
@@ -56,15 +55,21 @@ bool ButtonClass::PostUpdate() {
 		clicked = false;
 	}
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN && hovering) 
+	if (hovering)
 	{
-		clicked = true;
-	}
-	if (hovering && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) 
-	{
-		clicked = false;
-	}
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		{
+			clicked = true;
+		}
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
+		{
+			clicked = false;
+		}
 
+		//Once we know everything that is happening (and we are interacting with the button 
+		//(hovering is necessary for any other action on the button)) we can pass that info to the modules
+			App->UiElementCallback(this);
+	}
 	DisplayButton();
 
 	return true;
