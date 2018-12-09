@@ -25,7 +25,8 @@ bool ButtonClass::Awake() {
 }
 //Start
 bool ButtonClass::Start() {
-
+	was_hovered = false;
+	was_clicked = false;
 
 	return true;
 }
@@ -44,6 +45,15 @@ bool ButtonClass::PostUpdate() {
 	
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 
+	if (hovering != was_hovered)
+	{
+		was_hovered = hovering;
+	}
+	
+	if (clicked != was_clicked)
+	{
+		was_clicked = clicked;
+	}
 	
 	if (!(MousePos.x < position.x || MousePos.x > position.x+rect.w || MousePos.y < position.y || MousePos.y >position.y + rect.h))
 	{

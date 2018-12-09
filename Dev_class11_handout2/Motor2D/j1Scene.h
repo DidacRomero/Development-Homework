@@ -37,6 +37,11 @@ public:
 	//UI Callback with the element that the user interacts with
 	void callbackUiElement(ElementGUI *element);
 
+
+	//Just for Audio testing
+	uint fx_hover_start;
+	uint fx_button_clicked;
+
 private:
 	SDL_Texture* debug_tex;
 	GuiImage* banner;

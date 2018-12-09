@@ -45,6 +45,10 @@ bool j1Scene::Start()
 
 	debug_tex = App->tex->Load("maps/path2.png");
 
+	App->audio->PlayMusic("audio/music/the_menu.ogg", 0.5f);
+	fx_hover_start = App->audio->LoadFx("audio/fx/button_hover_start.wav");
+	fx_button_clicked = App->audio->LoadFx("audio/fx/button_clicked.wav");
+
 	// TODO 3: Create the banner (rect {485, 829, 328, 103}) and the text "Hello World"
 
 	return true;
@@ -160,9 +164,14 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 {
 	if (element->type == ElementType::BUTTON)
 	{
-		if (element->hovering)
+		if (element->hovering && element->was_hovered == false)
 		{
-			element->position.x += 20;
+			App->audio->PlayFx(fx_hover_start);
+		}
+
+		if (element->was_clicked && element->clicked == false)
+		{
+			App->audio->PlayFx(fx_button_clicked);
 		}
 	}
 }

@@ -46,6 +46,9 @@ public:
 	bool hovering;
 	bool clicked;
 
+	bool was_hovered;
+	bool was_clicked;
+
 	int id;
 
 };
