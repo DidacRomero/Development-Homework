@@ -21,10 +21,24 @@ ButtonClass::~ButtonClass()
 
 bool ButtonClass::Awake() {
 
+	
+	if (Parent != nullptr) {
+		GlobalPosition.x = Parent->position.x + position.x;
+		GlobalPosition.y = Parent->position.y + position.y;
+		
+		InterRect.x=GlobalPosition.x;
+		InterRect.y = GlobalPosition.y;
+		InterRect.w = rect.w;
+		InterRect.h = rect.h;
+
+	}
+
+
 	return true;
 }
 //Start
 bool ButtonClass::Start() {
+	
 	was_hovered = false;
 	was_clicked = false;
 
@@ -55,7 +69,7 @@ bool ButtonClass::PostUpdate() {
 		was_clicked = clicked;
 	}
 	
-	if (!(MousePos.x < position.x || MousePos.x > position.x+rect.w || MousePos.y < position.y || MousePos.y >position.y + rect.h))
+	if (!(MousePos.x < InterRect.x || MousePos.x >InterRect.x+ InterRect.w || MousePos.y < InterRect.y || MousePos.y >InterRect.y + InterRect.h))
 	{
 		hovering = true;
 	}
@@ -92,9 +106,9 @@ bool ButtonClass::CleanUp() {
 void ButtonClass::DisplayButton() 
 {
 	 if(clicked)
-		App->render->Blit(tex, position.x, position.y, &clickedRect, isStatic);
+		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &clickedRect, isStatic);
 	else if (hovering)
-		App->render->Blit(tex, position.x, position.y, &hoveringRect, isStatic);
+		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &hoveringRect, isStatic);
 	else
-		App->render->Blit(tex, position.x, position.y, &rect, isStatic);
+		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &rect, isStatic);
 }

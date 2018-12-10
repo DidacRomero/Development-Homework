@@ -36,6 +36,8 @@ public:
 public:
 	
 	iPoint position;
+	iPoint GlobalPosition;
+
 	SDL_Rect rect;
 	SDL_Texture*tex;
 
@@ -50,6 +52,8 @@ public:
 	bool was_clicked;
 
 	int id;
+
+	ElementGUI*Parent;
 
 };
 

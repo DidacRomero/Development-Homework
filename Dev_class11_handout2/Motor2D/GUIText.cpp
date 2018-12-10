@@ -6,10 +6,11 @@
 
 
 
-GUIText::GUIText(int id, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex) : ElementGUI(id,type, position, rect, isStatic, tex)
+GUIText::GUIText(int id, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, const char*Text) : ElementGUI(id, type, position, rect, isStatic, tex), Text(Text)
 {
-
 	tex = nullptr;
+	
+
 }
 	
 
@@ -23,7 +24,13 @@ GUIText::~GUIText()
 
 bool GUIText::Awake() {
 
-	Text = "hello there,   aaaaaaahhhhh General Kenobiiii";
+	if (Parent != nullptr) {
+		GlobalPosition.x = Parent->position.x + position.x;
+		GlobalPosition.y = Parent->position.y + position.y;
+	}
+
+
+
 	ColorText.r = 255;
 	ColorText.g = 255;
 	ColorText.b = 255;
@@ -36,6 +43,7 @@ bool GUIText::Awake() {
 }
 //Start
 bool GUIText::Start() {
+
 
 	return true;
 }
@@ -62,5 +70,5 @@ bool GUIText::CleanUp() {
 
 void GUIText::DisplayText() {
 	
-	App->render->Blit(tex,position.x,position.y,&rect,isStatic);
+	App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y,&rect,isStatic);
 }

@@ -40,22 +40,23 @@ bool j1Gui::Start()
 	elementIds = 0;
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
-	iPoint testPoint = { 300,40 };
-	SDL_Rect testRect = { 485, 829, 328, 103 };
-	CreateElement(elementIds,ElementType::SPRITE,testPoint,testRect,atlas);
+	iPoint testPoint = { 300,100 };
+	SDL_Rect testRect = { 31, 544, 422, 448};
+	Panel=CreateElement(elementIds,ElementType::SPRITE,testPoint,testRect,atlas, ButtonType::NOT_BUTTON,nullptr);
 
-	iPoint textTestPoint = { 300,5 };
-	SDL_Rect textTestRect= { 0,0, 300, 20 };
-	CreateElement(elementIds,ElementType::TEXT, textTestPoint, textTestRect,nullptr);
+	iPoint textTestPoint = {190,20 };
+	SDL_Rect textTestRect= { 0,0, 50, 20 };
+	const char*Text = "Window";
+	CreateElement(elementIds,ElementType::TEXT, textTestPoint, textTestRect,nullptr,ButtonType::NOT_BUTTON,Text,Panel);
 
 
 
-	iPoint ButtonTestPoint = { 350,200 };
+	iPoint ButtonTestPoint = { 100,100};
 	SDL_Rect unHoveredRect = {2,112,226,64};
-	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas);
+	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas,ButtonType::DEFAULT, nullptr, Panel);
 
-	iPoint ButtonTestPoint_2 = { 350, 500 };
-	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint_2, unHoveredRect, atlas);
+	iPoint ButtonTestPoint_2 = { 100, 200 };
+	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint_2, unHoveredRect, atlas,ButtonType::DEFAULT, nullptr, Panel);
 
 
 	bool ret = true;
@@ -132,10 +133,11 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-void j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button)
+ElementGUI*j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button,const char*Text,ElementGUI*Parent)
 {
 
 	ElementGUI*ElemGUI = nullptr;
+	
 
 	switch (element)
 	{
@@ -148,7 +150,7 @@ void j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect 
 
 	case ElementType::TEXT:
 
-		ElemGUI = new GUIText(id,element, position, rect,true, tex );
+		ElemGUI = new GUIText(id,element, position, rect,true, tex,Text);
 		elementIds++;
 		break;
 
@@ -159,11 +161,15 @@ void j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect 
 		break;
 	}
 
+	ElemGUI->Parent = Parent;
+
 	if (ElemGUI != nullptr)
 		ElementList.add(ElemGUI);
 	else
 		LOG("ElemGUI is nullptr");
 
+
+	return ElemGUI;
 }
 
 

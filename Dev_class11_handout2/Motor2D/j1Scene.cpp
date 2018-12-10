@@ -180,7 +180,7 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 			else
 				App->fade->JustFadeToBlack(1.0f);
 
-			ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWNORMAL);
+			
 		}
 	}
 }

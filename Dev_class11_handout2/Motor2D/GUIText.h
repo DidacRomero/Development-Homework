@@ -10,7 +10,7 @@ class GUIText :public ElementGUI
 
 
 public:
-	GUIText(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex);
+	GUIText(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text);
 	
 	~GUIText();
 
@@ -36,6 +36,7 @@ private:
 	const char*Text;
 	SDL_Color ColorText;
 	_TTF_Font*Textfont;
+	
 
 };
 

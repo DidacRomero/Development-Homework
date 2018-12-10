@@ -39,6 +39,7 @@ public:
 
 	SDL_Rect hoveringRect;
 	SDL_Rect clickedRect;
+	SDL_Rect InterRect;
 };
 
 

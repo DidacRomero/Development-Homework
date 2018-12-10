@@ -17,6 +17,13 @@ GuiSprites::~GuiSprites()
 
 bool GuiSprites::Awake() {
 
+	
+	if (Parent != nullptr) {
+		GlobalPosition.x = Parent->position.x + position.x;
+		GlobalPosition.y = Parent->position.y + position.y;
+	}
+
+
 	return true;
 }
 //Start
