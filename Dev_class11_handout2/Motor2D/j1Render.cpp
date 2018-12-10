@@ -135,35 +135,26 @@ bool j1Render::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* section,
 	uint scale = App->win->GetScale();
 
 	SDL_Rect rect;
-	rect.x = (int)(camera.x * speed) + x * scale;
-	rect.y = (int)(camera.y * speed) + y * scale;
-
+	
 	if (useCamera)
 	{
 		rect.x = x;
 		rect.y = y;
-
-		if (section != NULL)
-		{
-			rect.w = section->w;
-			rect.h = section->h;
-		}
-		else
-		{
-			SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-		}
 	}
 	else
 	{
-		if (section != NULL)
-		{
-			rect.w = section->w;
-			rect.h = section->h;
-		}
-		else
-		{
-			SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
-		}
+		rect.x = (int)(camera.x * speed) + x * scale;
+		rect.y = (int)(camera.y * speed) + y * scale;
+	}
+	
+	if (section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
 	rect.w *= scale;

@@ -61,6 +61,12 @@
     <ClCompile Include="GUIText.cpp">
       <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
     </ClCompile>
+    <ClCompile Include="j1FadeToBlack.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="j1ModuleFadeToBlack.cpp">
+      <Filter>Desenvolupament  ========\Modules</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -140,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="GUIText.h">
       <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="j1FadeToBlack.h">
+      <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

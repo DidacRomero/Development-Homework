@@ -10,6 +10,7 @@
 #include "j1PathFinding.h"
 #include "j1Gui.h"
 #include "ElementGUI.h"
+#include "j1FadeToBlack.h"
 #include "j1Scene.h"
 
 j1Scene::j1Scene() : j1Module()
@@ -172,6 +173,10 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 		if (element->was_clicked && element->clicked == false)
 		{
 			App->audio->PlayFx(fx_button_clicked);
+			if (App->input->GetKey(SDL_SCANCODE_L) == KEY_IDLE)
+				App->fade->FadeToBlack(this, this, 3.0f);
+			else
+				App->fade->JustFadeToBlack(1.0f);
 		}
 	}
 }
