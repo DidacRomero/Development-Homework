@@ -109,6 +109,8 @@ bool j1Scene::Update(float dt)
 	if(App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		App->render->camera.x -= floor(200.0f * dt);
 
+
+
 	App->map->Draw();
 
 	int x, y;
@@ -177,6 +179,8 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 				App->fade->FadeToBlack(this, this, 3.0f);
 			else
 				App->fade->JustFadeToBlack(1.0f);
+
+			ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWNORMAL);
 		}
 	}
 }
