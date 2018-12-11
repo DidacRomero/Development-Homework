@@ -38,6 +38,7 @@ public:
 	iPoint position;
 	iPoint GlobalPosition;
 	iPoint MousePos;
+	iPoint LastMousePos;
 	
 	SDL_Rect rect;
 	SDL_Rect InterRect;

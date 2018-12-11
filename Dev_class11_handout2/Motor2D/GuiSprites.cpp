@@ -49,7 +49,7 @@ bool GuiSprites::PreUpdate() {
 }
 //Update		
 bool GuiSprites::Update() {
-
+	LastMousePos = MousePos;
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 
 	if (hovering != was_hovered)
@@ -125,8 +125,11 @@ void GuiSprites::UpdatePos()
 		}
 		else
 		{
-			if(dragging)
-			position = MousePos;
+			if (dragging)
+			{
+				position.x = MousePos.x - (LastMousePos.x - InterRect.x);
+				position.y = MousePos.y - (LastMousePos.y - InterRect.y);
+			}
 
 			GlobalPosition.x = position.x;
 			GlobalPosition.y = position.y;
