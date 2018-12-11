@@ -57,6 +57,8 @@ public:
 	bool draggable;
 	bool dragging;
 
+	bool being_used;
+
 	int id;
 
 	ElementGUI*Parent;

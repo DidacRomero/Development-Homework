@@ -80,10 +80,11 @@ bool j1Gui::Update(float dt) {
 
 	bool ret = true;
 
-	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
+	for (p2List_item<ElementGUI*>* item = ElementList.end; item; item = item->prev)
 	{
+
 		ret = item->data->Update();
-		if (!ret)
+		if (!ret || item->data->being_used)
 			break;
 	}
 

@@ -51,25 +51,20 @@ bool ButtonClass::PreUpdate() {
 }
 //Update		
 bool ButtonClass::Update() {
-	UpdatePos();
-	return true;
-}
-//PostUpdate	
-bool ButtonClass::PostUpdate() {
-	
+	LastMousePos = MousePos;
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 
 	if (hovering != was_hovered)
 	{
 		was_hovered = hovering;
 	}
-	
+
 	if (clicked != was_clicked)
 	{
 		was_clicked = clicked;
 	}
-	
-	if (!(MousePos.x < InterRect.x || MousePos.x >InterRect.x+ InterRect.w || MousePos.y < InterRect.y || MousePos.y >InterRect.y + InterRect.h))
+
+	if (!(MousePos.x < InterRect.x || MousePos.x >InterRect.x + InterRect.w || MousePos.y < InterRect.y || MousePos.y >InterRect.y + InterRect.h))
 	{
 		hovering = true;
 	}
@@ -84,18 +79,46 @@ bool ButtonClass::PostUpdate() {
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
 		{
 			clicked = true;
+
 		}
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 		{
 			clicked = false;
 		}
 
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+		{
+			if (draggable)
+			{
+				dragging = true;
+			}
+		}
+
 		//Once we know everything that is happening (and we are interacting with the button 
 		//(hovering is necessary for any other action on the button)) we can pass that info to the modules
-			App->UiElementCallback(this);
+		App->UiElementCallback(this);
 	}
-	DisplayButton();
 
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP && dragging == true)
+	{
+		dragging = false;
+	}
+
+	if (hovering || clicked || dragging)
+	{
+		being_used = true;
+	}
+	else
+	{
+		being_used = false;
+	}
+	UpdatePos();
+
+	return true;
+}
+//PostUpdate	
+bool ButtonClass::PostUpdate() {
+	DisplayButton();
 	return true;
 }
 //CleanUp
@@ -116,12 +139,28 @@ void ButtonClass::DisplayButton()
 void ButtonClass::UpdatePos()
 {
 	if (Parent != nullptr) {
+		if (dragging)
+		{
+			position.x = MousePos.x - (LastMousePos.x - (InterRect.x - Parent->InterRect.x));
+			position.y = MousePos.y - (LastMousePos.y - (InterRect.y - Parent->InterRect.y));
+		}
 		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
 		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
-
-		InterRect.x = GlobalPosition.x;
-		InterRect.y = GlobalPosition.y;
-		InterRect.w = rect.w;
-		InterRect.h = rect.h;
 	}
+	else
+	{
+		if (dragging)
+		{
+			position.x = MousePos.x - (LastMousePos.x - InterRect.x);
+			position.y = MousePos.y - (LastMousePos.y - InterRect.y);
+		}
+
+		GlobalPosition.x = position.x;
+		GlobalPosition.y = position.y;
+	}
+
+	InterRect.x = GlobalPosition.x;
+	InterRect.y = GlobalPosition.y;
+	InterRect.w = rect.w;
+	InterRect.h = rect.h;
 }

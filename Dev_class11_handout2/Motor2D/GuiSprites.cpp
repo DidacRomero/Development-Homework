@@ -115,13 +115,13 @@ bool GuiSprites::CleanUp() {
 void GuiSprites::UpdatePos()
 {
 		if (Parent != nullptr) {
+			if (dragging)
+			{
+				position.x = MousePos.x - (LastMousePos.x - Parent->InterRect.x);
+				position.y = MousePos.y - (LastMousePos.y - Parent->InterRect.y);
+			}
 			GlobalPosition.x = Parent->GlobalPosition.x + position.x;
 			GlobalPosition.y = Parent->GlobalPosition.y + position.y;
-
-			InterRect.x = GlobalPosition.x;
-			InterRect.y = GlobalPosition.y;
-			InterRect.w = rect.w;
-			InterRect.h = rect.h;
 		}
 		else
 		{
@@ -133,12 +133,12 @@ void GuiSprites::UpdatePos()
 
 			GlobalPosition.x = position.x;
 			GlobalPosition.y = position.y;
-
-			InterRect.x = GlobalPosition.x;
-			InterRect.y = GlobalPosition.y;
-			InterRect.w = rect.w;
-			InterRect.h = rect.h;
 		}
+
+		InterRect.x = GlobalPosition.x;
+		InterRect.y = GlobalPosition.y;
+		InterRect.w = rect.w;
+		InterRect.h = rect.h;
 }
 
 
