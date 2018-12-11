@@ -4,7 +4,7 @@
 #include "j1Input.h"
 
 
-GuiSprites::GuiSprites(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable) : ElementGUI(id,type,position, rect, isStatic, draggable, tex){
+GuiSprites::GuiSprites(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactuable,bool invisible) : ElementGUI(id,type,position, rect, isStatic, draggable, interactuable, invisible, tex){
 
 
 }
@@ -49,6 +49,24 @@ bool GuiSprites::PreUpdate() {
 }
 //Update		
 bool GuiSprites::Update() {
+	
+	UpdatePos();
+
+	return true;
+}
+//PostUpdate	
+bool GuiSprites::PostUpdate() {
+	DisplaySprite();
+	return true;
+}
+//CleanUp
+bool GuiSprites::CleanUp() {
+
+	return true;
+}
+
+bool GuiSprites::InteractionUpdate()
+{
 	LastMousePos = MousePos;
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 
@@ -96,18 +114,6 @@ bool GuiSprites::Update() {
 	{
 		dragging = false;
 	}
-
-	UpdatePos();
-
-	return true;
-}
-//PostUpdate	
-bool GuiSprites::PostUpdate() {
-	DisplaySprite();
-	return true;
-}
-//CleanUp
-bool GuiSprites::CleanUp() {
 
 	return true;
 }

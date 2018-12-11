@@ -6,11 +6,9 @@
 
 
 
-GUIText::GUIText(int id, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, const char*Text, bool draggable) : ElementGUI(id, type, position, rect, isStatic, draggable, tex), Text(Text)
+GUIText::GUIText(int id, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, const char*Text, bool draggable, bool interactuable, bool invisible) : ElementGUI(id, type, position, rect, isStatic, draggable, interactuable, invisible, tex), Text(Text)
 {
 	tex = nullptr;
-	
-
 }
 	
 
@@ -72,6 +70,7 @@ void GUIText::DisplayText() {
 	
 	App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y,&rect,isStatic);
 }
+
 
 void GUIText::UpdatePos()
 {

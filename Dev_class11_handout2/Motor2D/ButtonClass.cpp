@@ -4,7 +4,7 @@
 #include "j1Input.h"
 #include "j1Scene.h"
 
-ButtonClass::ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable) : ElementGUI(id,type, position, rect, isStatic, draggable, tex) {
+ButtonClass::ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible) : ElementGUI(id,type, position, rect, isStatic, draggable, interactable, invisible, tex) {
 
 	hoveringRect={646,170,226,64};
 	 clickedRect = {416,170,226,64 };
@@ -15,8 +15,6 @@ ButtonClass::ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rec
 ButtonClass::~ButtonClass()
 {
 }
-
-
 
 
 bool ButtonClass::Awake() {
@@ -36,6 +34,7 @@ bool ButtonClass::Awake() {
 
 	return true;
 }
+
 //Start
 bool ButtonClass::Start() {
 	
@@ -44,13 +43,45 @@ bool ButtonClass::Start() {
 
 	return true;
 }
+
 //PreUpdate		
 bool ButtonClass::PreUpdate() {
 
 	return true;
 }
+
 //Update		
 bool ButtonClass::Update() {
+	
+	UpdatePos();
+
+	return true;
+}
+
+//PostUpdate	
+bool ButtonClass::PostUpdate() {
+	DisplayButton();
+	return true;
+}
+
+//CleanUp
+bool ButtonClass::CleanUp() {
+
+	return true;
+}
+
+void ButtonClass::DisplayButton() 
+{
+	 if(clicked)
+		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &clickedRect, isStatic);
+	else if (hovering)
+		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &hoveringRect, isStatic);
+	else
+		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &rect, isStatic);
+}
+
+bool ButtonClass::InteractionUpdate()
+{
 	LastMousePos = MousePos;
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
 
@@ -112,28 +143,8 @@ bool ButtonClass::Update() {
 	{
 		being_used = false;
 	}
-	UpdatePos();
 
 	return true;
-}
-//PostUpdate	
-bool ButtonClass::PostUpdate() {
-	DisplayButton();
-	return true;
-}
-//CleanUp
-bool ButtonClass::CleanUp() {
-
-	return true;
-}
-void ButtonClass::DisplayButton() 
-{
-	 if(clicked)
-		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &clickedRect, isStatic);
-	else if (hovering)
-		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &hoveringRect, isStatic);
-	else
-		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &rect, isStatic);
 }
 
 void ButtonClass::UpdatePos()
