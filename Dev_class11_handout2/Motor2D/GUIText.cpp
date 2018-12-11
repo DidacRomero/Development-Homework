@@ -6,7 +6,7 @@
 
 
 
-GUIText::GUIText(int id, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, const char*Text) : ElementGUI(id, type, position, rect, isStatic, tex), Text(Text)
+GUIText::GUIText(int id, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, const char*Text, bool draggable) : ElementGUI(id, type, position, rect, isStatic, draggable, tex), Text(Text)
 {
 	tex = nullptr;
 	
@@ -25,8 +25,8 @@ GUIText::~GUIText()
 bool GUIText::Awake() {
 
 	if (Parent != nullptr) {
-		GlobalPosition.x = Parent->position.x + position.x;
-		GlobalPosition.y = Parent->position.y + position.y;
+		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
+		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
 	}
 
 
@@ -54,7 +54,7 @@ bool GUIText::PreUpdate() {
 }
 //Update		
 bool GUIText::Update() {
-
+	UpdatePos();
 	return true;
 }
 //PostUpdate	
@@ -71,4 +71,12 @@ bool GUIText::CleanUp() {
 void GUIText::DisplayText() {
 	
 	App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y,&rect,isStatic);
+}
+
+void GUIText::UpdatePos()
+{
+	if (Parent != nullptr) {
+		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
+		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
+	}
 }

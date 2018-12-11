@@ -12,7 +12,7 @@ class ElementGUI
 {
 public:
 
-	ElementGUI(int id, ElementType Element, iPoint position, SDL_Rect rect, bool isStatic, SDL_Texture*tex = nullptr);
+	ElementGUI(int id, ElementType Element, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, SDL_Texture*tex = nullptr);
 
 
 
@@ -31,14 +31,16 @@ public:
 	//CleanUp
 	virtual bool CleanUp() { return true; }
 
-	
+	virtual void UpdatePos() {}
 
 public:
 	
 	iPoint position;
 	iPoint GlobalPosition;
-
+	iPoint MousePos;
+	
 	SDL_Rect rect;
+	SDL_Rect InterRect;
 	SDL_Texture*tex;
 
 	ElementType type;
@@ -50,6 +52,9 @@ public:
 
 	bool was_hovered;
 	bool was_clicked;
+
+	bool draggable;
+	bool dragging;
 
 	int id;
 

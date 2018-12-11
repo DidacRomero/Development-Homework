@@ -10,7 +10,7 @@ class GuiSprites :public ElementGUI
 {
 public:
 
-	GuiSprites(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex );
+	GuiSprites(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable);
 
 	~GuiSprites();
 
@@ -27,9 +27,8 @@ public:
 	//CleanUp
 	bool CleanUp();
 
-
+	void UpdatePos() override;
 public:
-
 
 
 	void DisplaySprite();

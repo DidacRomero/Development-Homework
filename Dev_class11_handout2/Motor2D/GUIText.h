@@ -10,7 +10,7 @@ class GUIText :public ElementGUI
 
 
 public:
-	GUIText(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text);
+	GUIText(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text,bool draggable);
 	
 	~GUIText();
 
@@ -30,6 +30,7 @@ public:
 
 public:
 	void DisplayText();
+	void UpdatePos() override;
 	
 private:
 

@@ -10,7 +10,7 @@ struct SDL_Rect;
 class ButtonClass :public ElementGUI
 {
 public:
-	ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex);
+	ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable);
 
 
 	~ButtonClass();
@@ -29,9 +29,8 @@ public:
 	//CleanUp
 	bool CleanUp();
 
-
-
 	void DisplayButton();
+	void UpdatePos() override;
 
 public:
 
@@ -39,7 +38,7 @@ public:
 
 	SDL_Rect hoveringRect;
 	SDL_Rect clickedRect;
-	SDL_Rect InterRect;
+	
 };
 
 

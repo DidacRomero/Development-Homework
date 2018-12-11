@@ -165,6 +165,8 @@ bool j1Scene::CleanUp()
 
 void j1Scene::callbackUiElement(ElementGUI *element)
 {
+	App->input->GetMouseMotion(mouse_motion.x, mouse_motion.y);
+
 	if (element->type == ElementType::BUTTON)
 	{
 		if (element->hovering && element->was_hovered == false)
@@ -181,6 +183,14 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 				App->fade->JustFadeToBlack(1.0f);
 
 			
+		}
+	}
+
+	if (element->type == ElementType::SPRITE)
+	{
+		if (element->clicked && (mouse_motion.x != 0 || mouse_motion.y != 0))
+		{
+			//element->UpdatePos();
 		}
 	}
 }

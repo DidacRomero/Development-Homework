@@ -40,7 +40,7 @@ bool j1Gui::Start()
 	elementIds = 0;
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
-	iPoint testPoint = { 300,100 };
+	iPoint testPoint = { 100,50 };
 	SDL_Rect testRect = { 31, 544, 422, 448};
 	Panel=CreateElement(elementIds,ElementType::SPRITE,testPoint,testRect,atlas, ButtonType::NOT_BUTTON,nullptr);
 
@@ -76,7 +76,7 @@ bool j1Gui::PreUpdate()
 	return true;
 }
 
-bool j1Gui::Update() {
+bool j1Gui::Update(float dt) {
 
 	bool ret = true;
 
@@ -133,7 +133,7 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-ElementGUI*j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button,const char*Text,ElementGUI*Parent)
+ElementGUI*j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button,const char*Text,ElementGUI*Parent,bool draggable)
 {
 
 	ElementGUI*ElemGUI = nullptr;
@@ -144,19 +144,19 @@ ElementGUI*j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL
 		
 	case ElementType::SPRITE:
 
-		ElemGUI = new GuiSprites(id,element,position,rect,true, tex);
+		ElemGUI = new GuiSprites(id,element,position,rect,true, tex,draggable);
 		elementIds++;
 			break;
 
 	case ElementType::TEXT:
 
-		ElemGUI = new GUIText(id,element, position, rect,true, tex,Text);
+		ElemGUI = new GUIText(id,element, position, rect,true, tex,Text,draggable);
 		elementIds++;
 		break;
 
 	case ElementType::BUTTON:
 
-		ElemGUI = new ButtonClass(id,element, position, rect, true, tex);
+		ElemGUI = new ButtonClass(id,element, position, rect, true, tex,draggable);
 		elementIds++;
 		break;
 	}

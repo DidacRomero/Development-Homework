@@ -4,7 +4,7 @@
 #include "j1Input.h"
 #include "j1Scene.h"
 
-ButtonClass::ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex) : ElementGUI(id,type, position, rect, isStatic, tex) {
+ButtonClass::ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable) : ElementGUI(id,type, position, rect, isStatic, draggable, tex) {
 
 	hoveringRect={646,170,226,64};
 	 clickedRect = {416,170,226,64 };
@@ -23,8 +23,8 @@ bool ButtonClass::Awake() {
 
 	
 	if (Parent != nullptr) {
-		GlobalPosition.x = Parent->position.x + position.x;
-		GlobalPosition.y = Parent->position.y + position.y;
+		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
+		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
 		
 		InterRect.x=GlobalPosition.x;
 		InterRect.y = GlobalPosition.y;
@@ -51,7 +51,7 @@ bool ButtonClass::PreUpdate() {
 }
 //Update		
 bool ButtonClass::Update() {
-
+	UpdatePos();
 	return true;
 }
 //PostUpdate	
@@ -111,4 +111,17 @@ void ButtonClass::DisplayButton()
 		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &hoveringRect, isStatic);
 	else
 		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &rect, isStatic);
+}
+
+void ButtonClass::UpdatePos()
+{
+	if (Parent != nullptr) {
+		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
+		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
+
+		InterRect.x = GlobalPosition.x;
+		InterRect.y = GlobalPosition.y;
+		InterRect.w = rect.w;
+		InterRect.h = rect.h;
+	}
 }

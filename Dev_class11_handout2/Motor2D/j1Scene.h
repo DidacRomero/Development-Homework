@@ -42,6 +42,9 @@ public:
 	uint fx_hover_start;
 	uint fx_button_clicked;
 
+	//Testing
+	iPoint mouse_motion;
+
 private:
 	SDL_Texture* debug_tex;
 	GuiImage* banner;

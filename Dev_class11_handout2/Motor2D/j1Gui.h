@@ -53,8 +53,9 @@ public:
 
 	// Called before all Updates
 	bool PreUpdate();
-
-	bool Update();
+	
+	//Called to Update
+	bool Update(float dt);
 
 	// Called after all Updates
 	bool PostUpdate();
@@ -67,7 +68,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	ElementGUI*CreateElement(int id, ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button = ButtonType::NOT_BUTTON, const char*Text=nullptr,ElementGUI*Parent=nullptr);
+	ElementGUI*CreateElement(int id, ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, ButtonType button = ButtonType::NOT_BUTTON, const char*Text=nullptr,ElementGUI*Parent=nullptr, bool draggable = true); // FIX FROM TRUE TO FALSE
 	
 
 	p2List<ElementGUI*> ElementList;
