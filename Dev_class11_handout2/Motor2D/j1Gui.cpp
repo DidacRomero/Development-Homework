@@ -42,22 +42,27 @@ bool j1Gui::Start()
 
 	iPoint testPoint = { 100,50 };
 	SDL_Rect testRect = { 31, 544, 422, 448};
-	Panel=CreateElement(elementIds,ElementType::SPRITE,testPoint,testRect,atlas, true, ButtonType::NOT_BUTTON,nullptr,nullptr,true);
+	const char* PanelText = "Window";
+	Panel=CreateElement(elementIds, PanelText, ElementType::SPRITE,testPoint,testRect,atlas, true, ButtonType::NOT_BUTTON,nullptr,nullptr,true);
 
 	iPoint textTestPoint = {190,20 };
 	SDL_Rect textTestRect= { 0,0, 50, 20 };
 	const char*Text = "Window";
-	CreateElement(elementIds,ElementType::TEXT, textTestPoint, textTestRect,nullptr,false,ButtonType::NOT_BUTTON,Text,Panel,false);
+	CreateElement(elementIds, Text, ElementType::TEXT, textTestPoint, textTestRect,nullptr,false,ButtonType::NOT_BUTTON,Text,Panel,false);
 
 
 
 	iPoint ButtonTestPoint = { 100,100};
 	SDL_Rect unHoveredRect = {2,112,226,64};
-	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas, true,ButtonType::DEFAULT, nullptr, Panel, true);
+	CreateElement(elementIds, "Fade_Button", ElementType::BUTTON, ButtonTestPoint, unHoveredRect, atlas, true,ButtonType::DEFAULT, nullptr, Panel, true);
 
 	iPoint ButtonTestPoint_2 = { 100, 200 };
-	CreateElement(elementIds, ElementType::BUTTON, ButtonTestPoint_2, unHoveredRect, atlas,false,ButtonType::DEFAULT, nullptr, Panel, false);
+	ElementGUI* RRButton = CreateElement(elementIds, "Rick Roll", ElementType::BUTTON, ButtonTestPoint_2, unHoveredRect, atlas,true,ButtonType::DEFAULT, nullptr, Panel, true);
 
+	iPoint RRtextTestPoint = { 50,20 };
+	SDL_Rect RRtextTestRect = { 0,0, 100, 25 };
+	const char* RRText = "Rick_Roll_Button";
+	CreateElement(elementIds, RRText, ElementType::TEXT, RRtextTestPoint, RRtextTestRect, nullptr, false, ButtonType::NOT_BUTTON, RRText, RRButton, false);
 
 	bool ret = true;
 	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
@@ -150,7 +155,7 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-ElementGUI*j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, bool interactable, ButtonType button,const char*Text,ElementGUI*Parent, bool draggable,bool invisible)
+ElementGUI*j1Gui::CreateElement(int id, const char* name, ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, bool interactable, ButtonType button,const char*Text,ElementGUI*Parent, bool draggable,bool invisible)
 {
 
 	ElementGUI*ElemGUI = nullptr;
@@ -161,24 +166,27 @@ ElementGUI*j1Gui::CreateElement(int id,ElementType element, iPoint position, SDL
 		
 	case ElementType::SPRITE:
 
-		ElemGUI = new GuiSprites(id,element,position,rect,true, tex,draggable,interactable,invisible);
+		ElemGUI = new GuiSprites(id, name, element,position,rect,true, tex,draggable,interactable,invisible);
 		elementIds++;
 			break;
 
 	case ElementType::TEXT:
 
-		ElemGUI = new GUIText(id,element, position, rect,true, tex,Text,draggable,interactable, invisible);
+		ElemGUI = new GUIText(id,name, element, position, rect,true, tex,Text,draggable,interactable, invisible);
 		elementIds++;
 		break;
 
 	case ElementType::BUTTON:
 
-		ElemGUI = new ButtonClass(id,element, position, rect, true, tex,draggable,interactable, invisible);
+		ElemGUI = new ButtonClass(id, name, element, position, rect, true, tex,draggable,interactable, invisible);
 		elementIds++;
 		break;
 	}
 
 	ElemGUI->Parent = Parent;
+
+	/*if (ElemGUI->Parent != nullptr)
+		ElemGUI->Parent->children.add(ElemGUI);*/
 
 	if (ElemGUI != nullptr)
 		ElementList.add(ElemGUI);

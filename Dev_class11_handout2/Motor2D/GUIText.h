@@ -10,7 +10,7 @@ class GUIText :public ElementGUI
 
 
 public:
-	GUIText(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text,bool draggable, bool interactuable, bool invisible);
+	GUIText(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text,bool draggable, bool interactuable, bool invisible);
 	
 	~GUIText();
 

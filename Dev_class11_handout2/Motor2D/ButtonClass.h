@@ -10,7 +10,7 @@ struct SDL_Rect;
 class ButtonClass :public ElementGUI
 {
 public:
-	ButtonClass(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible);
+	ButtonClass(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible);
 
 
 	~ButtonClass();

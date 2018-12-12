@@ -174,7 +174,7 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 			App->audio->PlayFx(fx_hover_start);
 		}
 
-		if (element->was_clicked && element->clicked == false)
+		if (element->name == "Fade_Button"	&&	element->was_clicked && element->clicked == false)
 		{
 			App->audio->PlayFx(fx_button_clicked);
 			if (App->input->GetKey(SDL_SCANCODE_L) == KEY_IDLE)
@@ -183,6 +183,14 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 				App->fade->JustFadeToBlack(1.0f);
 
 			
+		}
+		
+		if (element->name == "Rick Roll"	&&	element->was_clicked && element->clicked == false)
+		{
+			App->audio->PlayFx(fx_button_clicked);
+			ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWNORMAL);
+
+
 		}
 	}
 
@@ -193,4 +201,6 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 			//element->UpdatePos();
 		}
 	}
+
+
 }

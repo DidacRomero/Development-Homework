@@ -7,12 +7,11 @@
 #include "SDL/include/SDL.h"  
 
 
-
 class ElementGUI
 {
 public:
 
-	ElementGUI(int id, ElementType Element, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, bool interactable, bool invisible, SDL_Texture*tex = nullptr);
+	ElementGUI(int id, const char* name, ElementType Element, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, bool interactable, bool invisible, SDL_Texture*tex = nullptr);
 
 
 
@@ -36,6 +35,7 @@ public:
 
 public:
 	
+	const char* name;
 	iPoint position;
 	iPoint GlobalPosition;
 	iPoint MousePos;
@@ -65,6 +65,8 @@ public:
 	int id;
 
 	ElementGUI*Parent;
+
+	p2List<ElementGUI*> children;
 
 };
 

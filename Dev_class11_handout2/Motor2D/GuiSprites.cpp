@@ -4,7 +4,7 @@
 #include "j1Input.h"
 
 
-GuiSprites::GuiSprites(int id,ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactuable,bool invisible) : ElementGUI(id,type,position, rect, isStatic, draggable, interactuable, invisible, tex){
+GuiSprites::GuiSprites(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactuable,bool invisible) : ElementGUI(id, name, type,position, rect, isStatic, draggable, interactuable, invisible, tex){
 
 
 }
