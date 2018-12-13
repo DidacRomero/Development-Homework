@@ -96,13 +96,11 @@ bool j1Gui::Update(float dt) {
 			}
 	}
 	//Do their update
-	for (p2List_item<ElementGUI*>* item = ElementList.end; item; item = item->prev)
+	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
 	{
 		if (item->data->invisible == false)
 		{
 				ret = item->data->Update();
-				if (!ret || item->data->being_used)
-					break;
 		}
 	}
 
@@ -120,6 +118,7 @@ bool j1Gui::PostUpdate()
 		if (item->data->invisible == false)
 		{
 			ret = item->data->PostUpdate();
+			item->data->debugDraw();
 			if (!ret)
 				break;
 		}

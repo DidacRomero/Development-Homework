@@ -31,6 +31,8 @@ bool GUIText::Awake() {
 		Parent->children.add(this);
 	}
 
+	InterRect.w = rect.w;
+	InterRect.h = rect.h;
 
 	ColorText.r = 255;
 	ColorText.g = 255;
@@ -81,4 +83,7 @@ void GUIText::UpdatePos()
 		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
 		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
 	}
+
+	InterRect.x = GlobalPosition.x;
+	InterRect.y = GlobalPosition.y;
 }

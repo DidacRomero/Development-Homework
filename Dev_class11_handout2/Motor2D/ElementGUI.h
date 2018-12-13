@@ -33,6 +33,8 @@ public:
 	virtual bool InteractionUpdate() { return true; }
 	virtual void UpdatePos() {}
 
+	void debugDraw();
+
 public:
 	
 	const char* name;
