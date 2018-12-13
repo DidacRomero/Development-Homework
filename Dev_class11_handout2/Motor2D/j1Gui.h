@@ -38,6 +38,15 @@ enum class ButtonType {
 
 };
 
+enum class ElementAction
+{
+	NONE = -1,
+	FADE,
+	RICK_ROLL,
+	MUSIC_VOL,
+
+};
+
 class j1Gui : public j1Module
 {
 public:
@@ -70,7 +79,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	ElementGUI*CreateElement(int id, const char* name, ElementType element, iPoint position, SDL_Rect &rect, SDL_Rect &sliderButtonRect, SDL_Texture* tex, bool interactable, ButtonType button = ButtonType::NOT_BUTTON, const char*Text=nullptr,ElementGUI*Parent=nullptr, bool draggable = false, bool invisible = false);
+	ElementGUI*CreateElement(int id, const char* name, ElementType element, ElementAction action, iPoint position, SDL_Rect &rect, SDL_Rect &sliderButtonRect, SDL_Texture* tex, bool interactable, ButtonType button = ButtonType::NOT_BUTTON, const char*Text=nullptr,ElementGUI*Parent=nullptr, bool draggable = false, bool invisible = false);
 	
 
 	p2List<ElementGUI*> ElementList;

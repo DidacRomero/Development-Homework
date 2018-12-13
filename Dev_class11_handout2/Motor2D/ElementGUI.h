@@ -11,9 +11,7 @@ class ElementGUI
 {
 public:
 
-	ElementGUI(int id, const char* name, ElementType Element, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, bool interactable, bool invisible, SDL_Texture*tex = nullptr);
-
-
+	ElementGUI(int id, const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, bool interactable, bool invisible, SDL_Texture*tex = nullptr);
 
 	virtual ~ElementGUI();
 
@@ -48,6 +46,7 @@ public:
 	SDL_Texture*tex;
 
 	ElementType type;
+	ElementAction action;
 
 	bool isStatic;
 
