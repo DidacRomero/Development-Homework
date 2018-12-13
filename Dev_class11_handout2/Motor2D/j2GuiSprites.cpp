@@ -143,8 +143,6 @@ void j2GuiSprites::UpdatePos()
 
 		InterRect.x = GlobalPosition.x;
 		InterRect.y = GlobalPosition.y;
-		InterRect.w = rect.w;
-		InterRect.h = rect.h;
 }
 
 

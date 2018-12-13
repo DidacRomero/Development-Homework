@@ -4,7 +4,7 @@
 #include "j1Input.h"
 #include "j1Scene.h"
 
-j2ButtonClass::j2ButtonClass(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible) : ElementGUI(id, name, type, position, rect, isStatic, interactable, draggable,  invisible, tex) {
+j2ButtonClass::j2ButtonClass(int id, const char* name, ElementType type, ButtonType buttonType, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible) : ElementGUI(id, name, type, position, rect, isStatic, interactable, draggable,  invisible, tex), bType(buttonType) {
 
 	hoveringRect={646,170,226,64};
 	 clickedRect = {416,170,226,64 };
@@ -29,6 +29,21 @@ bool j2ButtonClass::Awake() {
 		InterRect.w = rect.w;
 		InterRect.h = rect.h;
 
+	}
+
+	if (draggable)
+	{
+		switch (bType)
+		{
+		case ButtonType::DEFAULT:
+			draggable_x = true;
+			draggable_y = true;
+			break;
+		case ButtonType::SLIDER:
+			draggable_x = true;
+			draggable_y = false;
+			break;
+		}
 	}
 
 
@@ -152,7 +167,10 @@ void j2ButtonClass::UpdatePos()
 	if (Parent != nullptr) {
 		if (dragging)
 		{
+			if (draggable_x)
 			position.x = MousePos.x - (LastMousePos.x - (InterRect.x - Parent->InterRect.x));
+			
+			if (draggable_y)
 			position.y = MousePos.y - (LastMousePos.y - (InterRect.y - Parent->InterRect.y));
 		}
 		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
@@ -162,16 +180,28 @@ void j2ButtonClass::UpdatePos()
 	{
 		if (dragging)
 		{
+			if(draggable_x)
 			position.x = MousePos.x - (LastMousePos.x - InterRect.x);
+			
+			if(draggable_y)
 			position.y = MousePos.y - (LastMousePos.y - InterRect.y);
 		}
 
 		GlobalPosition.x = position.x;
 		GlobalPosition.y = position.y;
+
+	}
+
+	if (bType == ButtonType::SLIDER && Parent != nullptr)
+	{
+		if (GlobalPosition.x + InterRect.w > Parent->GlobalPosition.x + Parent->rect.w)
+			GlobalPosition.x = Parent->GlobalPosition.x + Parent->rect.w -InterRect.w;
+
+		if (GlobalPosition.x < Parent->GlobalPosition.x)
+			GlobalPosition.x = Parent->GlobalPosition.x;
+		
 	}
 
 	InterRect.x = GlobalPosition.x;
 	InterRect.y = GlobalPosition.y;
-	InterRect.w = rect.w;
-	InterRect.h = rect.h;
 }

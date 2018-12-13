@@ -1,9 +1,29 @@
 #pragma once
 #include "ElementGUI.h"
-class j2SliderGUI :public ElementGUI
+class j2SliderGUI : public ElementGUI
 {
 public:
-	/*j2SliderGUI();
-	~j2SliderGUI();*/
+	j2SliderGUI(int id, const char* name, ElementType Element, iPoint position, SDL_Rect rect, SDL_Rect buttonRect,  bool isStatic, SDL_Texture*tex, bool draggable, bool interactable, bool invisible);
+	~j2SliderGUI();
+
+	//Start
+	bool Start();
+
+	//PreUpdate		
+	bool PreUpdate();
+	//Update		
+	bool Update();
+	//PostUpdate	
+	bool PostUpdate();
+	//CleanUp
+	bool CleanUp();
+
+	void UpdatePos();
+
+public:
+	float slider_value;
+	float slider_unitVal;
+	uint length;
+	bool values_calc = false;
 };
 

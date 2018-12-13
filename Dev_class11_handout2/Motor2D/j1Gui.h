@@ -23,6 +23,7 @@ enum class ElementType
 	BUTTON,
 	TEXT,
 	SPRITE,
+	SLIDER,
 	NOT_ELEMENT
 
 };
@@ -31,6 +32,7 @@ enum class ButtonType {
 
 	CHECKLIST,
 	DEFAULT,
+	SLIDER,
 	NOT_BUTTON
 
 
@@ -68,7 +70,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	ElementGUI*CreateElement(int id, const char* name, ElementType element, iPoint position, SDL_Rect &rect, SDL_Texture* tex, bool interactable, ButtonType button = ButtonType::NOT_BUTTON, const char*Text=nullptr,ElementGUI*Parent=nullptr, bool draggable = false, bool invisible = false);
+	ElementGUI*CreateElement(int id, const char* name, ElementType element, iPoint position, SDL_Rect &rect, SDL_Rect &sliderButtonRect, SDL_Texture* tex, bool interactable, ButtonType button = ButtonType::NOT_BUTTON, const char*Text=nullptr,ElementGUI*Parent=nullptr, bool draggable = false, bool invisible = false);
 	
 
 	p2List<ElementGUI*> ElementList;
