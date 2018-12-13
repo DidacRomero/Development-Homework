@@ -1,4 +1,4 @@
-#include "GUIText.h"
+#include "j2GUIText.h"
 #include "j1App.h"
 #include "j1Fonts.h"
 #include "SDL_TTF\include\SDL_ttf.h"
@@ -6,21 +6,21 @@
 
 
 
-GUIText::GUIText(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, const char*Text, bool draggable, bool interactuable, bool invisible) : ElementGUI(id, name, type, position, rect, isStatic, draggable, interactuable, invisible, tex), Text(Text)
+j2GUIText::j2GUIText(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, const char*Text, bool draggable, bool interactuable, bool invisible) : ElementGUI(id, name, type, position, rect, isStatic, draggable, interactuable, invisible, tex), Text(Text)
 {
 	tex = nullptr;
 }
 	
 
 
-GUIText::~GUIText()
+j2GUIText::~j2GUIText()
 {
 }
 
 
 
 
-bool GUIText::Awake() {
+bool j2GUIText::Awake() {
 	if (Parent != nullptr) {
 		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
 		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
@@ -45,39 +45,39 @@ bool GUIText::Awake() {
 	return true;
 }
 //Start
-bool GUIText::Start() {
+bool j2GUIText::Start() {
 
 
 	return true;
 }
 //PreUpdate		
-bool GUIText::PreUpdate() {
+bool j2GUIText::PreUpdate() {
 
 	return true;
 }
 //Update		
-bool GUIText::Update() {
+bool j2GUIText::Update() {
 	UpdatePos();
 	return true;
 }
 //PostUpdate	
-bool GUIText::PostUpdate() {
+bool j2GUIText::PostUpdate() {
 	DisplayText();
 	return true;
 }
 //CleanUp
-bool GUIText::CleanUp() {
+bool j2GUIText::CleanUp() {
 
 	return true;
 }
 
-void GUIText::DisplayText() {
+void j2GUIText::DisplayText() {
 	
 	App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y,&rect,isStatic);
 }
 
 
-void GUIText::UpdatePos()
+void j2GUIText::UpdatePos()
 {
 	if (Parent != nullptr) {
 		GlobalPosition.x = Parent->GlobalPosition.x + position.x;

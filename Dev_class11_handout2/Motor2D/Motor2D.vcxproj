@@ -76,10 +76,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ButtonClass.cpp" />
+    <ClCompile Include="j2ButtonClass.cpp" />
     <ClCompile Include="ElementGUI.cpp" />
-    <ClCompile Include="GuiSprites.cpp" />
-    <ClCompile Include="GUIText.cpp" />
+    <ClCompile Include="j2GuiSprites.cpp" />
+    <ClCompile Include="j2GUIText.cpp" />
     <ClCompile Include="j1FadeToBlack.cpp" />
     <ClCompile Include="j1Fonts.cpp" />
     <ClCompile Include="j1Gui.cpp" />
@@ -100,10 +100,10 @@
     <ClCompile Include="PugiXml\src\pugixml.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ButtonClass.h" />
+    <ClInclude Include="j2ButtonClass.h" />
     <ClInclude Include="ElementGUI.h" />
-    <ClInclude Include="GuiSprites.h" />
-    <ClInclude Include="GUIText.h" />
+    <ClInclude Include="j2GuiSprites.h" />
+    <ClInclude Include="j2GUIText.h" />
     <ClInclude Include="j1FadeToBlack.h" />
     <ClInclude Include="j1Fonts.h" />
     <ClInclude Include="j1Gui.h" />

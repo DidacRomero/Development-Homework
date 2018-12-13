@@ -1,10 +1,10 @@
-#include "ButtonClass.h"
+#include "j2ButtonClass.h"
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Input.h"
 #include "j1Scene.h"
 
-ButtonClass::ButtonClass(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible) : ElementGUI(id, name, type, position, rect, isStatic, interactable, draggable,  invisible, tex) {
+j2ButtonClass::j2ButtonClass(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible) : ElementGUI(id, name, type, position, rect, isStatic, interactable, draggable,  invisible, tex) {
 
 	hoveringRect={646,170,226,64};
 	 clickedRect = {416,170,226,64 };
@@ -12,12 +12,12 @@ ButtonClass::ButtonClass(int id, const char* name, ElementType type, iPoint posi
 }
 
 
-ButtonClass::~ButtonClass()
+j2ButtonClass::~j2ButtonClass()
 {
 }
 
 
-bool ButtonClass::Awake() {
+bool j2ButtonClass::Awake() {
 
 	
 	if (Parent != nullptr) {
@@ -36,7 +36,7 @@ bool ButtonClass::Awake() {
 }
 
 //Start
-bool ButtonClass::Start() {
+bool j2ButtonClass::Start() {
 	
 	was_hovered = false;
 	was_clicked = false;
@@ -45,13 +45,13 @@ bool ButtonClass::Start() {
 }
 
 //PreUpdate		
-bool ButtonClass::PreUpdate() {
+bool j2ButtonClass::PreUpdate() {
 
 	return true;
 }
 
 //Update		
-bool ButtonClass::Update() {
+bool j2ButtonClass::Update() {
 	
 	UpdatePos();
 
@@ -59,18 +59,18 @@ bool ButtonClass::Update() {
 }
 
 //PostUpdate	
-bool ButtonClass::PostUpdate() {
+bool j2ButtonClass::PostUpdate() {
 	DisplayButton();
 	return true;
 }
 
 //CleanUp
-bool ButtonClass::CleanUp() {
+bool j2ButtonClass::CleanUp() {
 
 	return true;
 }
 
-void ButtonClass::DisplayButton() 
+void j2ButtonClass::DisplayButton()
 {
 	 if(clicked)
 		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &clickedRect, isStatic);
@@ -80,7 +80,7 @@ void ButtonClass::DisplayButton()
 		App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y, &rect, isStatic);
 }
 
-bool ButtonClass::InteractionUpdate()
+bool j2ButtonClass::InteractionUpdate()
 {
 	LastMousePos = MousePos;
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
@@ -147,7 +147,7 @@ bool ButtonClass::InteractionUpdate()
 	return true;
 }
 
-void ButtonClass::UpdatePos()
+void j2ButtonClass::UpdatePos()
 {
 	if (Parent != nullptr) {
 		if (dragging)

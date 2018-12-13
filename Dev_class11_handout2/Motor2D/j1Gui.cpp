@@ -7,9 +7,9 @@
 #include "j1Input.h"
 #include "j1Gui.h"
 #include "ElementGUI.h"
-#include "GuiSprites.h"
-#include "GUIText.h"
-#include "ButtonClass.h"
+#include "j2GuiSprites.h"
+#include "j2GUIText.h"
+#include "j2ButtonClass.h"
 
 
 
@@ -165,19 +165,19 @@ ElementGUI*j1Gui::CreateElement(int id, const char* name, ElementType element, i
 		
 	case ElementType::SPRITE:
 
-		ElemGUI = new GuiSprites(id, name, element,position,rect,true, tex,draggable,interactable,invisible);
+		ElemGUI = new j2GuiSprites(id, name, element,position,rect,true, tex,draggable,interactable,invisible);
 		elementIds++;
 			break;
 
 	case ElementType::TEXT:
 
-		ElemGUI = new GUIText(id,name, element, position, rect,true, tex,Text,draggable,interactable, invisible);
+		ElemGUI = new j2GUIText(id,name, element, position, rect,true, tex,Text,draggable,interactable, invisible);
 		elementIds++;
 		break;
 
 	case ElementType::BUTTON:
 
-		ElemGUI = new ButtonClass(id, name, element, position, rect, true, tex,draggable,interactable, invisible);
+		ElemGUI = new j2ButtonClass(id, name, element, position, rect, true, tex,draggable,interactable, invisible);
 		elementIds++;
 		break;
 	}

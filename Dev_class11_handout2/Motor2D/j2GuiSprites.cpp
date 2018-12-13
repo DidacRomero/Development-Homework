@@ -1,22 +1,22 @@
-#include "GuiSprites.h"
+#include "j2GuiSprites.h"
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Input.h"
 
 
-GuiSprites::GuiSprites(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactuable,bool invisible) : ElementGUI(id, name, type,position, rect, isStatic, draggable, interactuable, invisible, tex){
+j2GuiSprites::j2GuiSprites(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactuable,bool invisible) : ElementGUI(id, name, type,position, rect, isStatic, draggable, interactuable, invisible, tex){
 
 
 }
 
 
-GuiSprites::~GuiSprites()
+j2GuiSprites::~j2GuiSprites()
 {
 }
 
 
 
-bool GuiSprites::Awake() {
+bool j2GuiSprites::Awake() {
 
 	
 	if (Parent != nullptr) {
@@ -37,35 +37,35 @@ bool GuiSprites::Awake() {
 	return true;
 }
 //Start
-bool GuiSprites::Start() {
+bool j2GuiSprites::Start() {
 
 
 	return true;
 }
 //PreUpdate		
-bool GuiSprites::PreUpdate() {
+bool j2GuiSprites::PreUpdate() {
 
 	return true;
 }
 //Update		
-bool GuiSprites::Update() {
+bool j2GuiSprites::Update() {
 	
 	UpdatePos();
 
 	return true;
 }
 //PostUpdate	
-bool GuiSprites::PostUpdate() {
+bool j2GuiSprites::PostUpdate() {
 	DisplaySprite();
 	return true;
 }
 //CleanUp
-bool GuiSprites::CleanUp() {
+bool j2GuiSprites::CleanUp() {
 
 	return true;
 }
 
-bool GuiSprites::InteractionUpdate()
+bool j2GuiSprites::InteractionUpdate()
 {
 	LastMousePos = MousePos;
 	App->input->GetMousePosition(MousePos.x, MousePos.y);
@@ -118,7 +118,7 @@ bool GuiSprites::InteractionUpdate()
 	return true;
 }
 
-void GuiSprites::UpdatePos()
+void j2GuiSprites::UpdatePos()
 {
 		if (Parent != nullptr) {
 			if (dragging)
@@ -149,7 +149,7 @@ void GuiSprites::UpdatePos()
 
 
 
-void GuiSprites::DisplaySprite() {
+void j2GuiSprites::DisplaySprite() {
 
 
 	App->render->Blit(tex, GlobalPosition.x, GlobalPosition.y,&rect,isStatic);

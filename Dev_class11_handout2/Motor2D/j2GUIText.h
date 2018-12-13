@@ -5,14 +5,14 @@
 
 struct _TTF_Font;
 
-class GUIText :public ElementGUI
+class j2GUIText :public ElementGUI
 {
 
 
 public:
-	GUIText(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text,bool draggable, bool interactuable, bool invisible);
+	j2GUIText(int id, const char* name, ElementType type, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text,bool draggable, bool interactuable, bool invisible);
 	
-	~GUIText();
+	~j2GUIText();
 
 
 	bool Awake();

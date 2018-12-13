@@ -52,19 +52,21 @@
     <ClCompile Include="j1Gui.cpp">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ButtonClass.cpp">
-      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GuiSprites.cpp">
-      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="GUIText.cpp">
-      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
-    </ClCompile>
     <ClCompile Include="j1FadeToBlack.cpp">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClCompile>
-    <ClCompile Include="j2SliderGUI.cpp" />
+    <ClCompile Include="j2ButtonClass.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="j2GuiSprites.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="j2GUIText.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="j2SliderGUI.cpp">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="j1Window.h">
@@ -136,19 +138,21 @@
     <ClInclude Include="j1Gui.h">
       <Filter>Desenvolupament  ========\Modules\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ButtonClass.h">
-      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GuiSprites.h">
-      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GUIText.h">
-      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
-    </ClInclude>
     <ClInclude Include="j1FadeToBlack.h">
       <Filter>Desenvolupament  ========\Modules</Filter>
     </ClInclude>
-    <ClInclude Include="j2SliderGUI.h" />
+    <ClInclude Include="j2ButtonClass.h">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="j2GuiSprites.h">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="j2GUIText.h">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="j2SliderGUI.h">
+      <Filter>Desenvolupament  ========\Modules\UI\ElementsGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Programacio 2 ===========">
