@@ -2,6 +2,7 @@
 #include "j1App.h"
 #include "j1Render.h"
 #include "j1Input.h"
+#include "j1Textures.h"
 
 
 j2GuiSprites::j2GuiSprites(const char* name, ElementType type, ElementAction action, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactuable,bool invisible) 
@@ -60,11 +61,7 @@ bool j2GuiSprites::PostUpdate() {
 	DisplaySprite();
 	return true;
 }
-//CleanUp
-bool j2GuiSprites::CleanUp() {
 
-	return true;
-}
 
 bool j2GuiSprites::InteractionUpdate()
 {

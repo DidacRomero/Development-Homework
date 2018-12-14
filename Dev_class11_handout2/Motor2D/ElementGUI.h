@@ -26,7 +26,7 @@ public:
 	//PostUpdate	
 	virtual bool PostUpdate() { return true; }
 	//CleanUp
-	virtual bool CleanUp() { return true; }
+	bool CleanUp();
 
 	virtual bool InteractionUpdate() { return true; }
 	virtual void UpdatePos() {}
