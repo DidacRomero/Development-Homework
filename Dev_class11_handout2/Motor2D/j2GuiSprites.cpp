@@ -51,7 +51,9 @@ bool j2GuiSprites::PreUpdate() {
 }
 //Update		
 bool j2GuiSprites::Update() {
-	
+	LastMousePos = MousePos;
+	App->input->GetMousePosition(MousePos.x, MousePos.y);
+
 	UpdatePos();
 
 	return true;
@@ -65,9 +67,6 @@ bool j2GuiSprites::PostUpdate() {
 
 bool j2GuiSprites::InteractionUpdate()
 {
-	LastMousePos = MousePos;
-	App->input->GetMousePosition(MousePos.x, MousePos.y);
-
 	if (hovering != was_hovered)
 	{
 		was_hovered = hovering;

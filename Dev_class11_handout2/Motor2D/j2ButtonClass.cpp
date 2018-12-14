@@ -69,8 +69,10 @@ bool j2ButtonClass::PreUpdate() {
 //Update		
 bool j2ButtonClass::Update() {
 	
-	UpdatePos();
+	LastMousePos = MousePos;
+	App->input->GetMousePosition(MousePos.x, MousePos.y);
 
+	UpdatePos();
 	return true;
 }
 
@@ -92,9 +94,6 @@ void j2ButtonClass::DisplayButton()
 
 bool j2ButtonClass::InteractionUpdate()
 {
-	LastMousePos = MousePos;
-	App->input->GetMousePosition(MousePos.x, MousePos.y);
-
 	if (hovering != was_hovered)
 	{
 		was_hovered = hovering;
