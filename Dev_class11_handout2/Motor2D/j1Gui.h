@@ -79,7 +79,7 @@ public:
 
 	const SDL_Texture* GetAtlas() const;
 
-	ElementGUI*CreateElement(int id, const char* name, ElementType element, ElementAction action, iPoint position, SDL_Rect &rect, SDL_Rect &sliderButtonRect, SDL_Texture* tex, bool interactable, ButtonType button = ButtonType::NOT_BUTTON, const char*Text=nullptr,ElementGUI*Parent=nullptr, bool draggable = false, bool invisible = false);
+	ElementGUI*CreateElement(const char* name, ElementType element, ElementAction action, iPoint position, SDL_Texture* tex, bool interactable, SDL_Rect &rect1, SDL_Rect &rect2, SDL_Rect &rect3, ButtonType button = ButtonType::NOT_BUTTON, const char*Text = nullptr, ElementGUI*Parent = nullptr, bool draggable = false, bool invisible = false);
 	
 
 	p2List<ElementGUI*> ElementList;
@@ -91,7 +91,7 @@ private:
 
 	ElementGUI*Panel;
 
-	int elementIds;
+
 
 	
 };

@@ -4,11 +4,11 @@
 #include "j1Input.h"
 #include "j1Scene.h"
 
-j2ButtonClass::j2ButtonClass(int id, const char* name, ElementType type, ElementAction action, ButtonType buttonType, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible)
-	: ElementGUI(id, name, type, action, position, rect, isStatic, interactable, draggable,  invisible, tex), bType(buttonType) {
+j2ButtonClass::j2ButtonClass( const char* name, ElementType type, ElementAction action, ButtonType buttonType, iPoint position, SDL_Rect &rect1, SDL_Rect &rect2, SDL_Rect &rect3, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible)
+	: ElementGUI(name, type, action, position, rect1, isStatic, interactable, draggable,  invisible, tex), bType(buttonType) {
 
 	hoveringRect={646,170,226,64};
-	 clickedRect = {416,170,226,64 };
+	clickedRect = {416,170,226,64 };
 
 }
 
@@ -140,10 +140,6 @@ bool j2ButtonClass::InteractionUpdate()
 				dragging = true;
 			}
 		}
-
-		//Once we know everything that is happening (and we are interacting with the button 
-		//(hovering is necessary for any other action on the button)) we can pass that info to the modules
-		App->UiElementCallback(this);
 	}
 
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP && dragging == true)
@@ -154,6 +150,10 @@ bool j2ButtonClass::InteractionUpdate()
 	if (hovering || clicked || dragging)
 	{
 		being_used = true;
+
+		//Once we know everything that is happening (and we are interacting with the button 
+		//(hovering is necessary for any other action on the button)) we can pass that info to the modules
+		App->UiElementCallback(this);
 	}
 	else
 	{

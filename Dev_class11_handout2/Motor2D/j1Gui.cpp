@@ -38,38 +38,40 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 // Called before the first frame
 bool j1Gui::Start()
 {
-	elementIds = 0;
+	
 	atlas = App->tex->Load(atlas_file_name.GetString());
 
 	SDL_Rect defaultRect = {0,0,0,0};
+	SDL_Rect hoveringRect = { 646,170,226,64 };
+	SDL_Rect clickedRect = { 416,170,226,64 };
 
 	iPoint testPoint = { 100,50 };
 	SDL_Rect testRect = { 31, 544, 422, 448};
 	const char* PanelText = "Window";
-	Panel=CreateElement(elementIds, PanelText, ElementType::SPRITE, ElementAction::NONE,testPoint,testRect,defaultRect,atlas, true, ButtonType::NOT_BUTTON,nullptr,nullptr,true);
+	Panel=CreateElement(PanelText, ElementType::SPRITE, ElementAction::NONE,testPoint, atlas, true, testRect, defaultRect,defaultRect, ButtonType::NOT_BUTTON,nullptr,nullptr,true);
 
 	iPoint textTestPoint = {190,20 };
 	SDL_Rect textTestRect= { 0,0, 50, 20 };
 	const char*Text = "Window";
-	CreateElement(elementIds, Text, ElementType::TEXT, ElementAction::NONE, textTestPoint, textTestRect, defaultRect, nullptr,false,ButtonType::NOT_BUTTON,Text,Panel,false);
+	CreateElement(Text, ElementType::TEXT, ElementAction::NONE, textTestPoint, nullptr,  false, textTestRect, defaultRect,defaultRect, ButtonType::NOT_BUTTON,Text,Panel,false);
 
 
 
 	iPoint ButtonTestPoint = { 100,100};
 	SDL_Rect unHoveredRect = {2,112,226,64};
-	CreateElement(elementIds, "Fade_Button", ElementType::BUTTON, ElementAction::FADE, ButtonTestPoint, unHoveredRect, defaultRect, atlas, true,ButtonType::DEFAULT, nullptr, Panel, true);
+	CreateElement("Fade_Button", ElementType::BUTTON, ElementAction::FADE, ButtonTestPoint, atlas, true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
 
 	iPoint ButtonTestPoint_2 = { 100, 200 };
-	ElementGUI* RRButton = CreateElement(elementIds, "Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, unHoveredRect, defaultRect, atlas,true,ButtonType::DEFAULT, nullptr, Panel, true);
+	ElementGUI* RRButton = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
 
 	iPoint RRtextTestPoint = { 50,20 };
 	SDL_Rect RRtextTestRect = { 0,0, 100, 25 };
-	const char* RRText = "Rick_Roll_Button";
-	CreateElement(elementIds, RRText, ElementType::TEXT, ElementAction::NONE, RRtextTestPoint, RRtextTestRect, defaultRect, nullptr, false, ButtonType::NOT_BUTTON, RRText, RRButton, false);
+	const char* RRText = "Rick_Roll_LABEL";
+	CreateElement(RRText, ElementType::TEXT, ElementAction::NONE, RRtextTestPoint,  nullptr, false, RRtextTestRect,defaultRect, defaultRect, ButtonType::NOT_BUTTON, RRText, RRButton, false);
 
 	iPoint SlidertestPos = { 200, 500};
 	SDL_Rect SlidertestRect = { 0, 12, 308, 12};
-	CreateElement(elementIds, "Slider", ElementType::SLIDER, ElementAction::MUSIC_VOL, SlidertestPos, SlidertestRect, unHoveredRect, atlas, false, ButtonType::NOT_BUTTON, RRText, nullptr, false);
+	CreateElement("Slider", ElementType::SLIDER, ElementAction::MUSIC_VOL, SlidertestPos, atlas, false, SlidertestRect, unHoveredRect, hoveringRect, ButtonType::NOT_BUTTON, RRText, nullptr, false,false);
 
 
 	bool ret = true;
@@ -89,7 +91,7 @@ bool j1Gui::Start()
 				break;
 		}
 	}
-
+	
 	return ret;
 }
 
@@ -172,7 +174,7 @@ const SDL_Texture* j1Gui::GetAtlas() const
 	return atlas;
 }
 
-ElementGUI*j1Gui::CreateElement(int id, const char* name, ElementType element, ElementAction action, iPoint position, SDL_Rect &rect, SDL_Rect &rect2, SDL_Texture* tex, bool interactable, ButtonType button,const char*Text,ElementGUI*Parent, bool draggable,bool invisible)
+ElementGUI*j1Gui::CreateElement(const char* name, ElementType element, ElementAction action, iPoint position, SDL_Texture* tex, bool interactable, SDL_Rect &rect1, SDL_Rect &rect2, SDL_Rect &rect3, ButtonType button, const char*Text,ElementGUI*Parent, bool draggable,bool invisible)
 {
 
 	ElementGUI*ElemGUI = nullptr;
@@ -183,25 +185,21 @@ ElementGUI*j1Gui::CreateElement(int id, const char* name, ElementType element, E
 		
 	case ElementType::SPRITE:
 
-		ElemGUI = new j2GuiSprites(id, name, element, action, position,rect,true, tex,draggable,interactable,invisible);
-		elementIds++;
+		ElemGUI = new j2GuiSprites(name, element, action, position,rect1,true, tex,draggable,interactable,invisible);
 			break;
 
 	case ElementType::TEXT:
 
-		ElemGUI = new j2GUIText(id,name, element, action, position, rect,true, tex,Text,draggable,interactable, invisible);
-		elementIds++;
+		ElemGUI = new j2GUIText(name, element, action, position, rect1,true, tex,Text,draggable,interactable, invisible);
 		break;
 
 	case ElementType::BUTTON:
 
-		ElemGUI = new j2ButtonClass(id, name, element, action, button, position, rect, true, tex,draggable,interactable, invisible);
-		elementIds++;
+		ElemGUI = new j2ButtonClass(name, element, action, button, position, rect1, rect2, rect3, true, tex,draggable,interactable, invisible);
 		break;
 
 	case ElementType::SLIDER:
-		ElemGUI = new j2SliderGUI(id, name, element, action, position, rect, rect2,  true, tex, draggable, interactable, invisible);
-		elementIds++;
+		ElemGUI = new j2SliderGUI(name, element, action, position, rect1, rect2,  true, tex, draggable, interactable, invisible);
 		break;
 	}
 

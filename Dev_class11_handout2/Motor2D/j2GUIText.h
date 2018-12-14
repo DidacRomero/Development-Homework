@@ -10,7 +10,7 @@ class j2GUIText :public ElementGUI
 
 
 public:
-	j2GUIText(int id, const char* name, ElementType type, ElementAction action, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text,bool draggable, bool interactuable, bool invisible);
+	j2GUIText(const char* name, ElementType type, ElementAction action, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex,const char*Text,bool draggable, bool interactuable, bool invisible);
 	
 	~j2GUIText();
 

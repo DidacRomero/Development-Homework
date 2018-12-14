@@ -11,7 +11,7 @@ class ElementGUI
 {
 public:
 
-	ElementGUI(int id, const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, bool interactable, bool invisible, SDL_Texture*tex = nullptr);
+	ElementGUI(const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, bool interactable, bool invisible, SDL_Texture*tex = nullptr);
 
 	virtual ~ElementGUI();
 
@@ -63,7 +63,6 @@ public:
 	bool invisible;
 	bool being_used;
 
-	int id;
 
 	ElementGUI*Parent;
 

@@ -3,7 +3,7 @@
 class j2SliderGUI : public ElementGUI
 {
 public:
-	j2SliderGUI(int id, const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, SDL_Rect buttonRect,  bool isStatic, SDL_Texture*tex, bool draggable, bool interactable, bool invisible);
+	j2SliderGUI(const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, SDL_Rect buttonRect,  bool isStatic, SDL_Texture*tex, bool draggable, bool interactable, bool invisible);
 	~j2SliderGUI();
 
 	//Start

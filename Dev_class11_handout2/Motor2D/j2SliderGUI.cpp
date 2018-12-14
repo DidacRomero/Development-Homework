@@ -3,11 +3,12 @@
 #include "j1App.h"
 
 
-j2SliderGUI::j2SliderGUI(int id, const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, SDL_Rect buttonRect, bool isStatic, SDL_Texture*tex, bool draggable, bool interactable, bool invisible) 
-	: ElementGUI(id, name, Element, action, position,rect,isStatic, draggable,interactable, invisible, tex)
+j2SliderGUI::j2SliderGUI(const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, SDL_Rect buttonRect, bool isStatic, SDL_Texture*tex, bool draggable, bool interactable, bool invisible) 
+	: ElementGUI(name, Element, action, position,rect,isStatic, draggable,interactable, invisible, tex)
 {
-	ElementGUI* SliderImage = App->gui->CreateElement(id, name, ElementType::SPRITE,ElementAction::NONE, {0,0}, rect, buttonRect, tex, true, ButtonType::NOT_BUTTON, nullptr, this, false);
-	App->gui->CreateElement(id, name, ElementType::BUTTON, action, { 0,0 - buttonRect.h /2 } , buttonRect, buttonRect, tex, true, ButtonType::SLIDER, nullptr, this, true);
+	SDL_Rect defRect = { 0,0,0,0 };
+	ElementGUI* SliderImage = App->gui->CreateElement(name, ElementType::SPRITE, ElementAction::NONE, { 0,0 }, tex, true, rect, defRect, defRect, ButtonType::NOT_BUTTON, nullptr, this, false);
+	App->gui->CreateElement(name, ElementType::BUTTON, action, { 0,0 - buttonRect.h /2 } ,  tex, true, buttonRect, buttonRect, defRect, ButtonType::SLIDER, nullptr, this, true);
 	
 }
 

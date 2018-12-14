@@ -189,15 +189,19 @@ void j1Scene::callbackUiElement(ElementGUI *element)
 				ShellExecuteA(NULL, "open", "https://www.youtube.com/watch?v=dQw4w9WgXcQ", NULL, NULL, SW_SHOWNORMAL);
 			}
 			break;
-
 		}
 
-
+		
 
 		if (element->hovering && element->was_hovered == false)
 		{
 			App->audio->PlayFx(fx_hover_start);
 		}
+	}
+
+	if (element->type == ElementType::SLIDER)
+	{
+
 	}
 
 	if (element->type == ElementType::SPRITE)
