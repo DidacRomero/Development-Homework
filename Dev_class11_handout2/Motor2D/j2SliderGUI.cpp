@@ -52,10 +52,6 @@ bool j2SliderGUI::PostUpdate()
 	return true;
 }
 
-bool j2SliderGUI::CleanUp()
-{
-	return true;
-}
 
 void j2SliderGUI::UpdatePos()
 {

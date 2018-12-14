@@ -26,8 +26,7 @@ public:
 	bool Update();
 	//PostUpdate	
 	bool PostUpdate();
-	//CleanUp
-	bool CleanUp();
+
 
 	void DisplayButton();
 	bool InteractionUpdate() override;

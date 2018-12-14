@@ -24,8 +24,6 @@ public:
 	bool Update();
 	//PostUpdate	
 	bool PostUpdate();
-	//CleanUp
-	bool CleanUp();
 
 
 public:

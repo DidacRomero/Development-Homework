@@ -66,11 +66,7 @@ bool j2GUIText::PostUpdate() {
 	DisplayText();
 	return true;
 }
-//CleanUp
-bool j2GUIText::CleanUp() {
 
-	return true;
-}
 
 void j2GUIText::DisplayText() {
 	

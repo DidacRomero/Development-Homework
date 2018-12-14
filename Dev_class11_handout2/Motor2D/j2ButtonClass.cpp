@@ -80,12 +80,6 @@ bool j2ButtonClass::PostUpdate() {
 	return true;
 }
 
-//CleanUp
-bool j2ButtonClass::CleanUp() {
-
-	return true;
-}
-
 void j2ButtonClass::DisplayButton()
 {
 	 if(clicked)

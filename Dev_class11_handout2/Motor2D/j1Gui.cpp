@@ -158,10 +158,12 @@ bool j1Gui::CleanUp()
 	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
 	{
 		ret = item->data->CleanUp();
+		RELEASE(item->data);
 		if (!ret)
 			break;
 	}
 	
+	ElementList.clear();
 	
 	return ret;
 
