@@ -112,6 +112,9 @@ bool j1Scene::Update(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT)
 		App->gui->CleanUp();
 
+	if (App->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN)
+		App->gui->debug = !App->gui->debug;
+
 
 
 	App->map->Draw();

@@ -31,7 +31,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 
-
+	debug = false;
 	return ret;
 }
 
@@ -138,7 +138,10 @@ bool j1Gui::PostUpdate()
 		if (item->data->invisible == false)
 		{
 			ret = item->data->PostUpdate();
-			item->data->debugDraw();
+			if (debug)
+			{
+				item->data->debugDraw();
+			}
 			if (!ret)
 				break;
 		}

@@ -81,13 +81,17 @@ public:
 
 	ElementGUI*CreateElement(const char* name, ElementType element, ElementAction action, iPoint position, SDL_Texture* tex, bool interactable, SDL_Rect &rect1, SDL_Rect &rect2, SDL_Rect &rect3, ButtonType button = ButtonType::NOT_BUTTON, const char*Text = nullptr, ElementGUI*Parent = nullptr, bool draggable = false, bool invisible = false);
 	
-
+public:
 	p2List<ElementGUI*> ElementList;
+
+	bool debug;
 
 private:
 
 	SDL_Texture* atlas;
 	p2SString atlas_file_name;
+
+	
 
 	ElementGUI*Panel;
 
