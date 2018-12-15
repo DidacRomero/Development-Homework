@@ -6,7 +6,7 @@
 
 
 j2GuiSprites::j2GuiSprites(const char* name, ElementType type, ElementAction action, iPoint position, SDL_Rect &rect, bool isStatic, SDL_Texture* tex, bool draggable, bool interactuable,bool invisible) 
-	: ElementGUI(name, type, action, position, rect, isStatic, draggable, interactuable, invisible, tex){
+	: ElementGUI(name, type, action, position, rect, isStatic, interactuable, draggable, invisible, tex){
 
 
 }

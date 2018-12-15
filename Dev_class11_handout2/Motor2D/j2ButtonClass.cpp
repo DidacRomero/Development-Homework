@@ -4,7 +4,7 @@
 #include "j1Input.h"
 #include "j1Scene.h"
 
-j2ButtonClass::j2ButtonClass( const char* name, ElementType type, ElementAction action, ButtonType buttonType, iPoint position, SDL_Rect &rect1, SDL_Rect &rect2, SDL_Rect &rect3, bool isStatic, SDL_Texture* tex, bool draggable, bool interactable, bool invisible)
+j2ButtonClass::j2ButtonClass( const char* name, ElementType type, ElementAction action, ButtonType buttonType, iPoint position, SDL_Rect &rect1, SDL_Rect &rect2, SDL_Rect &rect3, bool isStatic, SDL_Texture* tex, bool interactable, bool draggable, bool invisible)
 	: ElementGUI(name, type, action, position, rect1, isStatic, interactable, draggable,  invisible, tex), bType(buttonType) {
 
 	hoveringRect={646,170,226,64};
