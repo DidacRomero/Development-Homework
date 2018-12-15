@@ -20,6 +20,8 @@ j2ButtonClass::~j2ButtonClass()
 
 bool j2ButtonClass::Awake() {
 
+	GlobalPosition.x = position.x;
+	GlobalPosition.y = position.y;
 	
 	if (Parent != nullptr) {
 		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
@@ -30,6 +32,13 @@ bool j2ButtonClass::Awake() {
 		InterRect.w = rect.w;
 		InterRect.h = rect.h;
 
+	}
+	else
+	{
+		InterRect.x = GlobalPosition.x;
+		InterRect.y = GlobalPosition.y;
+		InterRect.w = rect.w;
+		InterRect.h = rect.h;
 	}
 
 	if (draggable)
@@ -56,6 +65,9 @@ bool j2ButtonClass::Start() {
 	
 	was_hovered = false;
 	was_clicked = false;
+	clicked = false;
+	hovering = false;
+	dragging = false;
 
 	return true;
 }
@@ -114,28 +126,27 @@ bool j2ButtonClass::InteractionUpdate()
 		clicked = false;
 	}
 
-	if (hovering)
+	if (hovering == true)
 	{
-		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{
 			clicked = true;
-
 		}
 		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP)
 		{
 			clicked = false;
 		}
 
-		if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+		if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT)
 		{
-			if (draggable)
+			if (draggable==true && clicked == true)
 			{
 				dragging = true;
 			}
 		}
 	}
 
-	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_UP && dragging == true)
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_IDLE)
 	{
 		dragging = false;
 	}
@@ -152,6 +163,7 @@ bool j2ButtonClass::InteractionUpdate()
 	{
 		being_used = false;
 	}
+	//App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_IDLE;
 
 	return true;
 }
@@ -159,7 +171,7 @@ bool j2ButtonClass::InteractionUpdate()
 void j2ButtonClass::UpdatePos()
 {
 	if (Parent != nullptr) {
-		if (dragging)
+		if (dragging == true)
 		{
 			if (draggable_x)
 			position.x = MousePos.x - (LastMousePos.x - (InterRect.x - Parent->InterRect.x));
@@ -172,12 +184,12 @@ void j2ButtonClass::UpdatePos()
 	}
 	else
 	{
-		if (dragging)
+		if (dragging == true)
 		{
-			if(draggable_x)
+			if(draggable_x == true)
 			position.x = MousePos.x - (LastMousePos.x - InterRect.x);
 			
-			if(draggable_y)
+			if(draggable_y == true)
 			position.y = MousePos.y - (LastMousePos.y - InterRect.y);
 		}
 
@@ -198,4 +210,5 @@ void j2ButtonClass::UpdatePos()
 
 	InterRect.x = GlobalPosition.x;
 	InterRect.y = GlobalPosition.y;
+
 }

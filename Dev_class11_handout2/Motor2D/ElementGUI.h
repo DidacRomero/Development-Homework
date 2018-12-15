@@ -11,7 +11,7 @@ class ElementGUI
 {
 public:
 
-	ElementGUI(const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, bool isStatic, bool draggable, bool interactable, bool invisible, SDL_Texture*tex = nullptr);
+	ElementGUI(const char* name, ElementType Element, ElementAction action, iPoint position, SDL_Rect rect, bool isStatic, bool interactable, bool draggable, bool invisible, SDL_Texture*tex = nullptr);
 
 	virtual ~ElementGUI();
 
@@ -36,10 +36,10 @@ public:
 public:
 	
 	const char* name;
-	iPoint position;
-	iPoint GlobalPosition;
-	iPoint MousePos;
-	iPoint LastMousePos;
+	iPoint position = { 0,0 };
+	iPoint GlobalPosition = { 0,0 };
+	iPoint MousePos = {0,0};
+	iPoint LastMousePos = { 0,0 };
 	
 	SDL_Rect rect;
 	SDL_Rect InterRect;
@@ -64,7 +64,7 @@ public:
 	bool being_used;
 
 
-	ElementGUI*Parent;
+	ElementGUI*Parent = nullptr;
 
 	p2List<ElementGUI*> children;
 
