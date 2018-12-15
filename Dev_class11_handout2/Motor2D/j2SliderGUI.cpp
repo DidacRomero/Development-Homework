@@ -10,6 +10,11 @@ j2SliderGUI::j2SliderGUI(const char* name, ElementType Element, ElementAction ac
 	ElementGUI* SliderImage = App->gui->CreateElement(name, ElementType::SPRITE, ElementAction::NONE, { 0,0 }, tex, true, rect, defRect, defRect, ButtonType::NOT_BUTTON, nullptr, this, false);
 	App->gui->CreateElement(name, ElementType::BUTTON, action, { 0,0 - buttonRect.h /2 } ,  tex, true, buttonRect, buttonRect, defRect, ButtonType::SLIDER, nullptr, this, true);
 	
+	was_hovered = false;
+	was_clicked = false;
+	clicked = false;
+	hovering = false;
+	dragging = false;
 }
 
 
@@ -56,7 +61,7 @@ bool j2SliderGUI::PostUpdate()
 void j2SliderGUI::UpdatePos()
 {
 	if (Parent != nullptr) {
-		if (dragging)
+		if (dragging == true)
 		{
 			position.x = MousePos.x - (LastMousePos.x - Parent->InterRect.x);
 			position.y = MousePos.y - (LastMousePos.y - Parent->InterRect.y);
@@ -66,7 +71,7 @@ void j2SliderGUI::UpdatePos()
 	}
 	else
 	{
-		if (dragging)
+		if (dragging == true)
 		{
 			position.x = MousePos.x - (LastMousePos.x - InterRect.x);
 			position.y = MousePos.y - (LastMousePos.y - InterRect.y);

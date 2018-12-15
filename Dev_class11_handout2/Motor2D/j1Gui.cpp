@@ -45,7 +45,7 @@ bool j1Gui::Start()
 	SDL_Rect hoveringRect = { 646,170,226,64 };
 	SDL_Rect clickedRect = { 416,170,226,64 };
 
-	/*iPoint testPoint = { 100,50 };
+	iPoint testPoint = { 100,50 };
 	SDL_Rect testRect = { 31, 544, 422, 448};
 	const char* PanelText = "Window";
 	Panel=CreateElement(PanelText, ElementType::SPRITE, ElementAction::NONE,testPoint, atlas, true, testRect, defaultRect,defaultRect, ButtonType::NOT_BUTTON,nullptr,nullptr,true);
@@ -55,33 +55,32 @@ bool j1Gui::Start()
 	const char*Text = "Window";
 	CreateElement(Text, ElementType::TEXT, ElementAction::NONE, textTestPoint, nullptr,  false, textTestRect, defaultRect,defaultRect, ButtonType::NOT_BUTTON,Text,Panel,false);
 
-*/
+
 
 	iPoint ButtonTestPoint = { 100,100};
 	SDL_Rect unHoveredRect = {2,112,226,64};
-	CreateElement("Fade_Button", ElementType::BUTTON, ElementAction::FADE, ButtonTestPoint, atlas, false, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, nullptr, true, false);
-	//ElementGUI*ElemGUI = nullptr;
-	//ElemGUI = new j2ButtonClass("FadeBUtton", ElementType::BUTTON, ElementAction::FADE,ButtonType::DEFAULT, ButtonTestPoint, unHoveredRect, hoveringRect, clickedRect, true, atlas, false,false,false);
-
+	CreateElement("Fade_Button", ElementType::BUTTON, ElementAction::FADE, ButtonTestPoint, atlas, false, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
+	
 	ElementGUI*ElemGUI2 = nullptr;
 	iPoint ButtonTestPoint_2 = { 100, 200 };
-	ElementGUI* RRButton = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,false, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, nullptr, true, false);
+	ElementGUI* RRButton = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,false, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
 
 	ButtonTestPoint_2 = { 100, 300 };
-	ElementGUI* RRButton2 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, nullptr, true, false);
+	ElementGUI* RRButton2 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
 
 	ButtonTestPoint_2 = { 100, 400 };
-	ElementGUI* RRButton3 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,false, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, nullptr, true, false);
-	/*iPoint RRtextTestPoint = { 50,20 };
+	ElementGUI* RRButton3 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,false, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
+	
+	iPoint RRtextTestPoint = { 50,20 };
 	SDL_Rect RRtextTestRect = { 0,0, 100, 25 };
 	const char* RRText = "Rick_Roll_LABEL";
-	CreateElement(RRText, ElementType::TEXT, ElementAction::NONE, RRtextTestPoint,  nullptr, false, RRtextTestRect,defaultRect, defaultRect, ButtonType::NOT_BUTTON, RRText, RRButton, false);*/
+	CreateElement(RRText, ElementType::TEXT, ElementAction::NONE, RRtextTestPoint,  nullptr, false, RRtextTestRect,defaultRect, defaultRect, ButtonType::NOT_BUTTON, RRText, RRButton, false);
 
-	/*iPoint SlidertestPos = { 200, 500};
+	iPoint SlidertestPos = { 200, 500};
 	SDL_Rect SlidertestRect = { 0, 12, 308, 12};
-	CreateElement("Slider", ElementType::SLIDER, ElementAction::MUSIC_VOL, SlidertestPos, atlas, false, SlidertestRect, unHoveredRect, hoveringRect, ButtonType::NOT_BUTTON, RRText, nullptr, false,false);
+	CreateElement("Slider", ElementType::SLIDER, ElementAction::MUSIC_VOL, SlidertestPos, atlas, false, SlidertestRect, unHoveredRect, hoveringRect, ButtonType::NOT_BUTTON, "None", nullptr, false,false);
 
-*/
+
 	bool ret = true;
 	for (p2List_item<ElementGUI*>* item = ElementList.start; item; item = item->next)
 	{

@@ -40,7 +40,11 @@ bool j2GuiSprites::Awake() {
 }
 //Start
 bool j2GuiSprites::Start() {
-
+	was_hovered = false;
+	was_clicked = false;
+	clicked = false;
+	hovering = false;
+	dragging = false;
 
 	return true;
 }
@@ -118,7 +122,7 @@ bool j2GuiSprites::InteractionUpdate()
 void j2GuiSprites::UpdatePos()
 {
 		if (Parent != nullptr) {
-			if (dragging)
+			if (dragging == true)
 			{
 				position.x = MousePos.x - (LastMousePos.x - Parent->InterRect.x);
 				position.y = MousePos.y - (LastMousePos.y - Parent->InterRect.y);
@@ -128,7 +132,7 @@ void j2GuiSprites::UpdatePos()
 		}
 		else
 		{
-			if (dragging)
+			if (dragging == true)
 			{
 				position.x = MousePos.x - (LastMousePos.x - InterRect.x);
 				position.y = MousePos.y - (LastMousePos.y - InterRect.y);

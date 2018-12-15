@@ -26,6 +26,11 @@ bool j2GUIText::Awake() {
 		GlobalPosition.x = Parent->GlobalPosition.x + position.x;
 		GlobalPosition.y = Parent->GlobalPosition.y + position.y;
 	}
+	else
+	{
+		GlobalPosition.x = position.x;
+		GlobalPosition.y = position.y;
+	}
 
 	if (Parent != nullptr)
 	{
@@ -47,7 +52,11 @@ bool j2GUIText::Awake() {
 }
 //Start
 bool j2GUIText::Start() {
-
+	was_hovered = false;
+	was_clicked = false;
+	clicked = false;
+	hovering = false;
+	dragging = false;
 
 	return true;
 }
