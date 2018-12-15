@@ -59,17 +59,17 @@ bool j1Gui::Start()
 
 	iPoint ButtonTestPoint = { 100,100};
 	SDL_Rect unHoveredRect = {2,112,226,64};
-	CreateElement("Fade_Button", ElementType::BUTTON, ElementAction::FADE, ButtonTestPoint, atlas, true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
+	CreateElement("Fade_Button", ElementType::BUTTON, ElementAction::FADE, ButtonTestPoint, atlas, true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, false, false);
 	
 	ElementGUI*ElemGUI2 = nullptr;
 	iPoint ButtonTestPoint_2 = { 100, 200 };
-	ElementGUI* RRButton = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
+	ElementGUI* RRButton = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, false, false);
 
 	ButtonTestPoint_2 = { 100, 300 };
-	ElementGUI* RRButton2 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
+	ElementGUI* RRButton2 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, false, false);
 
 	ButtonTestPoint_2 = { 100, 400 };
-	ElementGUI* RRButton3 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, true, false);
+	ElementGUI* RRButton3 = CreateElement("Rick Roll", ElementType::BUTTON, ElementAction::RICK_ROLL, ButtonTestPoint_2, atlas,true, unHoveredRect, hoveringRect, clickedRect, ButtonType::DEFAULT, nullptr, Panel, false, false);
 	
 	iPoint RRtextTestPoint = { 50,20 };
 	SDL_Rect RRtextTestRect = { 0,0, 100, 25 };
